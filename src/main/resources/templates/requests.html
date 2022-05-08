@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Requests</title>
+    <th:block th:replace="fragments/include :: include"/>
+</head>
+<body>
+<th:block th:replace="fragments/header :: header"/>
+<th:block th:replace="fragments/sidebar :: sidebar_menu"/>
+<table class="table-header">
+    <tr
+            th:each="request : ${listOfRequests}" class="ta">
+        <td th:text="${request.userName}" />
+        <td th:text="${request.vacationType}" />
+        <td th:text="${request.duration}" />
+        <td th:text="${request.approverName}" />
+    </tr>
+</table>
+    <p th:text="${test}"></p>
+<th:block th:replace="fragments/footer :: footer"/>
+</div>
+</div>
+</div>
+</body>
+</html>
