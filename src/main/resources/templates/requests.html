@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Requests</title>
-    <th:block th:replace="fragments/include :: include"/>
-</head>
-<body>
-<th:block th:replace="fragments/header :: header"/>
-<th:block th:replace="fragments/sidebar :: sidebar_menu"/>
-<table class="table-header">
-    <tr
-            th:each="request : ${listOfRequests}" class="ta">
-        <td th:text="${request.userName}" />
-        <td th:text="${request.vacationType}" />
-        <td th:text="${request.duration}" />
-        <td th:text="${request.approverName}" />
-    </tr>
-</table>
+<html layout:decorate="~{_layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<div layout:fragment="content">
+    <p>this is a static content</p>
+    <table class="table col-auto">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Vacation Type</th>
+            <th>Duration</th>
+            <th>Approver</th>
+        </tr>
+        </thead>
+        <tr
+                class="ta" th:each="request : ${listOfRequests}">
+            <td th:text="${request.userName}"/>
+            <td th:text="${request.vacationType}"/>
+            <td th:text="${request.duration}"/>
+            <td th:text="${request.approverName}"/>
+        </tr>
+    </table>
     <p th:text="${test}"></p>
-<th:block th:replace="fragments/footer :: footer"/>
 </div>
-</div>
-</div>
-</body>
 </html>
