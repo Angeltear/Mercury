@@ -1,16 +1,20 @@
 package com.technical.mercury.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import javax.persistence.*;
+
+@Entity
+@Table
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@ToString
+@RequiredArgsConstructor
 public class Employee {
-    private int userID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
+    private Long id;
     private String userName;
     private String userPosition;
     private String userLocation;
