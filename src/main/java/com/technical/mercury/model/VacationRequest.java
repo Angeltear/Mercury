@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Table
+@Table(name="VACATION_REQUEST")
 @Entity
 @Getter
 @Setter

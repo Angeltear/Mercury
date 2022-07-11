@@ -20,7 +20,7 @@ public class HomeController {
     @GetMapping("/index")
     public String getIndex(Model model) {
         Employee employee = new Employee();
-        employee.setUserName("SomeRandomEmp");
+        employee.setEmployeeLastName("SomeRandomEmp");
         model.addAttribute("employee", employee);
         model.addAttribute("pageTitle", "Home");
         return "test_index";
