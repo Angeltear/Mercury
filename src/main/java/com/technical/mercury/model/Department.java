@@ -20,7 +20,7 @@ public class Department {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "department_Id", nullable = false)
     private Long id;
-    private String departmentLocation;
+    private String departmentOffice;
     private String departmentName;
 
     @OneToMany(mappedBy = "department", orphanRemoval = true)
@@ -28,7 +28,7 @@ public class Department {
     private List<Employee> employees = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name = "location_Id", foreignKey = @ForeignKey(name ="FK_Location_ID"))
+    @JoinColumn(name = "location_Id", foreignKey = @ForeignKey(name = "FK_Location_ID"))
     private Location location;
 
 }

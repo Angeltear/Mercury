@@ -10258,7 +10258,7 @@
           var styles = get$b(element, 'style');
           var backup = styles === undefined ? 'no-styles' : styles.trim();
           if (backup === clobberStyle) {
-            return;
+
           } else {
             set$8(element, attr, backup);
             set$8(element, 'style', clobberStyle);

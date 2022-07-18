@@ -34,6 +34,7 @@ public class Employee {
     private Department department;
 
     @OneToMany(mappedBy = "employee", orphanRemoval = true)
+    @ToString.Exclude
     private List<EmployeeSalary> employeeSalaries = new ArrayList<>();
 
 }

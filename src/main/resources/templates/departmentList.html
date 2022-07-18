@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}">
+<body>
+<div layout:fragment="content">
+    <div class="card">
+
+        <!--
+                    <h5 class="card-title">Table with hoverable rows</h5>
+        -->
+            <div class="card-body">
+                <!-- Table with hoverable rows -->
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">City</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="department: ${departments}">
+                        <td th:text="${department.id}"></td>
+                        <td th:text="${department.departmentName}"></td>
+                        <td th:text="${department.departmentOffice}"></td>
+                        <td th:text="${department.location.city}"></td>
+                        <td th:text="${department.location.street_address}"></td>
+                        <td>
+                            <button type="button" class="btn btn-primary" href="/departments/add">Details</button>
+                            <button type="button" class="btn btn-warning" href="/departments/add">Edit</button>
+                            <button type="button" class="btn btn-danger" href="/departments/add">Delete</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!-- End Table with hoverable rows -->
+            </div>
+
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <a href="/departments/add" class="btn btn-primary"> New department</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

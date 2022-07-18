@@ -1,7 +1,10 @@
 package com.technical.mercury.Controllers;
 
+import com.technical.mercury.model.Department;
 import com.technical.mercury.model.Employee;
+import com.technical.mercury.model.PathToPage;
 import com.technical.mercury.model.VacationRequest;
+import com.technical.mercury.services.DepartmentService;
 import com.technical.mercury.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +20,10 @@ public class HomeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @GetMapping("/index")
+    @Autowired
+    DepartmentService departmentService;
+
+    @GetMapping({"/index", "/"})
     public String getIndex(Model model) {
         Employee employee = new Employee();
         employee.setEmployeeLastName("SomeRandomEmp");
@@ -37,6 +43,33 @@ public class HomeController {
         model.addAttribute("listOfRequests", listOfRequests);
         model.addAttribute("pageTitle", "Requests");
         return "requests";
+    }
+
+    @GetMapping("/departments")
+    public String getDepartments(Model model){
+        List<Department> departmentList = departmentService.getAll();
+        List<PathToPage> breadcrumbs = new ArrayList<>();
+        breadcrumbs.add(new PathToPage("Home", "/index"));
+      ///  breadcrumbs.add(new PathToPage("Departments", "/departments"));
+        model.addAttribute("breadcrumbs", breadcrumbs);
+        model.addAttribute("currentPage", "Departments");
+     //   if (!departmentList.isEmpty()){
+            model.addAttribute("departments",departmentList);
+            model.addAttribute("pageTitle", "Departments");
+   //     }
+        return "departmentList";
+    }
+
+    @GetMapping("/departments/add")
+    public String addDepartment(Model model){
+        List<PathToPage> breadcrumbs = new ArrayList<>();
+        breadcrumbs.add(new PathToPage("Home", "/index"));
+        breadcrumbs.add(new PathToPage("Departments", "/departments"));
+        model.addAttribute("breadcrumbs", breadcrumbs);
+        model.addAttribute("currentPage", "Add Department");
+
+        model.addAttribute("pageTitle", "Department Add");
+        return "departmentAdd";
     }
 
     @GetMapping("/employee")
