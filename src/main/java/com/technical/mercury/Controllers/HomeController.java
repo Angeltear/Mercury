@@ -1,15 +1,17 @@
 package com.technical.mercury.Controllers;
 
-import com.technical.mercury.model.Department;
-import com.technical.mercury.model.Employee;
-import com.technical.mercury.model.PathToPage;
-import com.technical.mercury.model.VacationRequest;
+import com.technical.mercury.model.*;
+import com.technical.mercury.repository.LocationRepository;
 import com.technical.mercury.services.DepartmentService;
 import com.technical.mercury.services.EmployeeService;
+import com.technical.mercury.services.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +23,12 @@ public class HomeController {
     private EmployeeService employeeService;
 
     @Autowired
-    DepartmentService departmentService;
+    private DepartmentService departmentService;
+
+    @Autowired
+    private LocationService locationService;
+
+
 
     @GetMapping({"/index", "/"})
     public String getIndex(Model model) {
@@ -68,8 +75,19 @@ public class HomeController {
         model.addAttribute("breadcrumbs", breadcrumbs);
         model.addAttribute("currentPage", "Add Department");
 
-        model.addAttribute("pageTitle", "Department Add");
+        model.addAttribute("pageTitle", "Add Department");
+
+        List<Location> locationList = locationService.getAll();
+
+        model.addAttribute("locationList", locationList);
+        model.addAttribute("department", new Department());
+
         return "departmentAdd";
+    }
+    @PostMapping("/departments/add")
+    public String addDepartment(@ModelAttribute Department department){
+    departmentService.save(department);
+    return "redirect:/departments";
     }
 
     @GetMapping("/employee")
