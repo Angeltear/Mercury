@@ -20,4 +20,12 @@ public class LocationService{
     }
 
     public Location save(Location location){return locationRepository.save(location);}
+
+    public Location getById(Long id) {
+        return locationRepository.findById(id).orElse(null);
+    }
+
+    public void delete(Long id) {
+        locationRepository.deleteById(id);
+    }
 }

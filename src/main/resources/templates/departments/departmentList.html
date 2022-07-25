@@ -30,9 +30,9 @@
                         <td th:text="${department.location.city}"></td>
                         <td th:text="${department.location.street_address}"></td>
                         <td>
-                            <button type="button" class="btn btn-primary" href="/departments/add">Details</button>
-                            <button type="button" class="btn btn-warning" href="/departments/add">Edit</button>
-                            <button type="button" class="btn btn-danger" href="/departments/add">Delete</button>
+                            <a class="btn btn-primary" href="/departments/add">Details</a>
+                            <a class="btn btn-warning" th:href="@{'/departments/edit/' +${department.id}}">Edit</a>
+                            <a class="btn btn-danger" th:href="@{'/departments/delete/' +${department.id}}">Delete</a>
                         </td>
                     </tr>
                     </tbody>

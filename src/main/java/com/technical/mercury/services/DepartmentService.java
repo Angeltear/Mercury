@@ -22,4 +22,12 @@ public class DepartmentService {
     public Department save(Department department){return departmentRepository.save(department);}
 
     public void delete(Department department){departmentRepository.delete(department);}
+
+    public void delete(Long id){
+        departmentRepository.deleteById(id);
+    }
+
+    public Department getById(Long id){
+        return departmentRepository.findById(id).orElse(null);
+    }
 }

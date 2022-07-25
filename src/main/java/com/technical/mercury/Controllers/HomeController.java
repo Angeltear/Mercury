@@ -1,7 +1,6 @@
 package com.technical.mercury.Controllers;
 
 import com.technical.mercury.model.*;
-import com.technical.mercury.repository.LocationRepository;
 import com.technical.mercury.services.DepartmentService;
 import com.technical.mercury.services.EmployeeService;
 import com.technical.mercury.services.LocationService;
@@ -11,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,44 +48,6 @@ public class HomeController {
         model.addAttribute("listOfRequests", listOfRequests);
         model.addAttribute("pageTitle", "Requests");
         return "requests";
-    }
-
-    @GetMapping("/departments")
-    public String getDepartments(Model model){
-        List<Department> departmentList = departmentService.getAll();
-        List<PathToPage> breadcrumbs = new ArrayList<>();
-        breadcrumbs.add(new PathToPage("Home", "/index"));
-      ///  breadcrumbs.add(new PathToPage("Departments", "/departments"));
-        model.addAttribute("breadcrumbs", breadcrumbs);
-        model.addAttribute("currentPage", "Departments");
-     //   if (!departmentList.isEmpty()){
-            model.addAttribute("departments",departmentList);
-            model.addAttribute("pageTitle", "Departments");
-   //     }
-        return "departmentList";
-    }
-
-    @GetMapping("/departments/add")
-    public String addDepartment(Model model){
-        List<PathToPage> breadcrumbs = new ArrayList<>();
-        breadcrumbs.add(new PathToPage("Home", "/index"));
-        breadcrumbs.add(new PathToPage("Departments", "/departments"));
-        model.addAttribute("breadcrumbs", breadcrumbs);
-        model.addAttribute("currentPage", "Add Department");
-
-        model.addAttribute("pageTitle", "Add Department");
-
-        List<Location> locationList = locationService.getAll();
-
-        model.addAttribute("locationList", locationList);
-        model.addAttribute("department", new Department());
-
-        return "departmentAdd";
-    }
-    @PostMapping("/departments/add")
-    public String addDepartment(@ModelAttribute Department department){
-    departmentService.save(department);
-    return "redirect:/departments";
     }
 
     @GetMapping("/employee")
