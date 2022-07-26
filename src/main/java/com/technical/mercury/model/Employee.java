@@ -1,6 +1,7 @@
 package com.technical.mercury.model;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -21,10 +22,13 @@ public class Employee {
     private String employeeFirstName;
     private String employeeLastName;
     private String employeePosition;
-    private String employeeManager;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate employmentStartDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate careerStartDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate trialPeriod;
     private String employeeEmail;
     private String employeePhoneNum;
@@ -36,5 +40,13 @@ public class Employee {
     @OneToMany(mappedBy = "employee", orphanRemoval = true)
     @ToString.Exclude
     private List<EmployeeSalary> employeeSalaries = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "employee_manager_id", foreignKey = @ForeignKey(name = "FK_Manager_ID"))
+    private Employee employeeManager;
+
+    @OneToMany(mappedBy = "employeeManager")
+    @ToString.Exclude
+    private List<Employee> employees;
 
 }
