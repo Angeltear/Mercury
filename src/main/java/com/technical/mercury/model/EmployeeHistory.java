@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class EmployeeSalary {
+public class EmployeeHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -25,9 +25,10 @@ public class EmployeeSalary {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startPeriod;
     private Double salary;
+    private String companyName;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id", foreignKey = @ForeignKey(name = "FK_Employee_ID"))
+    @JoinColumn(name = "employee_id", foreignKey = @ForeignKey(name = "FK_Hist_Employee_ID"))
     private Employee employee;
 
 }

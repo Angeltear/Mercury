@@ -30,6 +30,8 @@ public class Employee {
     private LocalDate birthDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate trialPeriod;
+    private LocalDate employmentEndDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String employeeEmail;
     private String employeePhoneNum;
 
@@ -48,5 +50,9 @@ public class Employee {
     @OneToMany(mappedBy = "employeeManager")
     @ToString.Exclude
     private List<Employee> employees;
+
+    @OneToMany(mappedBy = "employee", orphanRemoval = true)
+    @ToString.Exclude
+    private List<EmployeeSalary> employeeHistory = new ArrayList<>();
 
 }

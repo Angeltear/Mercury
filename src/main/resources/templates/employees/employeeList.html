@@ -38,6 +38,7 @@
                             <a class="btn btn-primary" href="/departments/add">Details</a>
                             <a class="btn btn-warning" th:href="@{'/employees/edit/' +${employee.id}}">Edit</a>
                             <a class="btn btn-danger" th:href="@{'/employees/delete/' +${employee.id}}">Delete</a>
+                            <a class="btn btn-primary" th:href="@{'/employeeSalary/' + ${employee.id}}">Salary</a>
                         </td>
                     </tr>
                     </tbody>
