@@ -8,13 +8,6 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">Employee Salary Details</h5>
-
-            <!--
-              private Long id;
-              private LocalDate endPeriod;
-              private LocalDate startPeriod;
-              private Double salary;
-               -->
             <form class="row g-3" th:action="@{/employeeSalary/add}" th:object="${employeeSalary}" method="post">
                 <input type="hidden" th:field="*{id}">
                 <input type="hidden" th:field="${employeeSalary.employee.id}">

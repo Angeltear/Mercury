@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}">
+<body>
+<div layout:fragment="content">
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Payroll Parameter Details</h5>
+            <!-- Vertical Form -->
+            <form class="row g-3" th:action="@{/params/add}" th:object="${parameters}" method="post">
+                <input type="hidden" th:field="*{id}">
+                <div class="col-12">
+                    <label for="inputNanme4" class="form-label fw-bold">Name</label>
+                    <input type="text" class="form-control" id="inputNanme4" th:field="*{parameterName}">
+                </div>
+                <div class="col-12">
+                    <label for="inputPassword4" class="form-label fw-bold">Percentage</label>
+                    <input type="text" class="form-control" id="inputPassword4" th:field="*{parameterPercentage}">
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                    <a th:href="@{/params}" class="btn btn-warning">Cancel</a>
+                </div>
+            </form><!-- Vertical Form -->
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

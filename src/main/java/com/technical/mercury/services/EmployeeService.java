@@ -1,21 +1,13 @@
 package com.technical.mercury.services;
 
-import com.technical.mercury.model.Employee;
-import com.technical.mercury.model.EmployeeHistory;
-import com.technical.mercury.model.EmployeeSalary;
-import com.technical.mercury.model.Vacation;
-import com.technical.mercury.repository.EmployeeHistoryRepository;
-import com.technical.mercury.repository.EmployeeRepository;
-import com.technical.mercury.repository.EmployeeSalaryRepository;
-import com.technical.mercury.repository.VacationRepository;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import com.technical.mercury.model.*;
+import com.technical.mercury.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +24,12 @@ public class EmployeeService {
 
     @Autowired
     private final VacationRepository vacationRepository;
+
+    @Autowired
+    private final PayslipRepository payslipRepository;
+
+    @Autowired
+    private final PayrollParamsRepository payrollParamsRepository;
 
     public List<Employee> getAll(){
         return employeeRepository.findAll();
@@ -96,6 +94,48 @@ public class EmployeeService {
             }
             vacationRepository.save(vacation);
         }
+    }
+
+    public void processForMonth(String month, int year){
+        List<Employee> unprocessedEmployees = employeeRepository.findAllNotProcessedForMonth(month,year);
+        Double incomeCeiling = payrollParamsRepository.findPayrollParamsByParameterName("IncomeCeiling").getParameterPercentage();
+        Double withholds = 0.0;
+        List<PayrollParams> payrollParams = new ArrayList<>();
+
+        for (Employee e:unprocessedEmployees) {
+            EmployeeSalary employeeSalary = new EmployeeSalary();
+            Payslip payslip = new Payslip();
+            withholds = 0.0;
+
+            payrollParams = payrollParamsRepository.findPayrollParamsByParameterNameIsNot("IncomeCeiling");
+            employeeSalary = employeeSalaryRepository.findEmployeeSalaryByEmployeeIdAndEndPeriodIsNull(e.getId());
+
+            payslip.setEmployee(e);
+            payslip.setMonth(month);
+            payslip.setYear(year);
+            payslip.setBaseSalary(employeeSalary.getSalary());
+
+            for (PayrollParams param: payrollParams) {
+                if(param.getParameterName().equals("Flat Tax")){
+                    withholds += employeeSalary.getSalary() * (param.getParameterPercentage()/100);
+                }
+                else {
+                    if (employeeSalary.getSalary() >= incomeCeiling){
+                        withholds += incomeCeiling * (param.getParameterPercentage() / 100);
+                    }
+                   else{
+                        withholds += employeeSalary.getSalary() * (param.getParameterPercentage() / 100);
+                    }
+                }
+            }
+
+            payslip.setWithholds(withholds);
+            payslip.setReceivable(employeeSalary.getSalary() - withholds);
+
+            payslipRepository.save(payslip);
+
+        }
+
     }
 
 

@@ -59,4 +59,8 @@ public class Employee {
     @ToString.Exclude
     private List<Vacation> vacationRequests = new ArrayList<>();
 
+    @OneToMany(mappedBy = "employee", orphanRemoval = true)
+    @ToString.Exclude
+    private List<Payslip> payslips = new ArrayList<>();
+
 }
