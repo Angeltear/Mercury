@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}">
+<body>
+<div layout:fragment="content">
+  <div class="card">
+
+    <!--
+                <h5 class="card-title">Table with hoverable rows</h5>
+    -->
+    <div class="card-body">
+      <!-- Table with hoverable rows -->
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Salary</th>
+          <th scope="col">Start Period</th>
+          <th scope="col">End Period</th>
+          <th scope="col">Employee ID</th>
+          <th scope="col">Company Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="history: ${employeeHistory}">
+          <td th:text="${history.id}"></td>
+          <td th:text="${history.employee.employeeFirstName}"></td>
+          <td th:text="${history.employee.employeeLastName}"></td>
+          <td th:text="${history.salary}"></td>
+          <td th:text="${history.startPeriod}"></td>
+          <td th:text="${history.endPeriod}"></td>
+          <td th:text="${id}"></td>
+          <td th:text="${history.companyName}"></td>
+          <td>
+            <a class="btn btn-primary" th:href="@{'/employeeHistory/edit/' + ${history.id} + '/' + ${history.employee.id}} ">Edit History</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <!-- End Table with hoverable rows -->
+    </div>
+
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <a th:href="@{'/employeeHistory/add/' + ${id}}" class="btn btn-primary"> New history entry</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

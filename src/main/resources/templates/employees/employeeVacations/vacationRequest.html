@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}">
+<body>
+<div layout:fragment="content">
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Vacation Request Details</h5>
+            <!--
+               private Long id;
+    private String vacationType;
+    private Long employeeApprover;
+    private String status;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate vacationStartDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate vacationEndDate;
+            -->
+            <form class="row g-3" th:action="@{/vacations/add}" th:object="${vacation}" method="post">
+                <input type="hidden" th:field="*{id}">
+                <input type="hidden" th:field="${vacation.employeeRequestor}">
+                <div class="col-12">
+                    <label for="inputNanme4" class="form-label fw-bold">First Name</label>
+                    <input type="text" class="form-control" id="inputNanme4" th:field="${vacation.employeeRequestor.employeeFirstName}">
+                </div>
+                <div class="col-12">
+                    <label for="inputNanme4" class="form-label fw-bold">Last Name</label>
+                    <input type="text" class="form-control" id="inputNanme4" th:field="${vacation.employeeRequestor.employeeLastName}">
+                </div>
+                <div class="col-12">
+                    <label for="inputNanme4" class="form-label fw-bold">Status</label>
+                    <input type="text" class="form-control" id="inputNanme4" th:field="${vacation.status}">
+                </div>
+                <div class="col-12">
+                    <label for="inputState" class="form-label fw-bold">Vacation Type</label>
+                    <select id="inputState" class="form-select" th:field="${vacation.vacationType}">
+                        <option value="Vacation">Vacation</option>
+                        <option value="Sick Leave">Sick Leave</option>
+                    </select>
+                </div>
+                <div class="col-12">
+                    <label for="inputPassword4" class="form-label fw-bold">Start Date</label>
+                    <input type="date" class="form-control" id="inputPassword4" th:field="*{vacationStartDate}" value="2022-07-26">
+                </div>
+                <div class="col-12">
+                    <label for="inputPassword4" class="form-label fw-bold">End Date</label>
+                    <input type="date" class="form-control" id="inputPassword4" th:field="*{vacationEndDate}" value="2022-07-26">
+                </div>
+
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                    <a th:href="@{/templates/employees}" class="btn btn-warning">Cancel</a>
+                </div>
+            </form><!-- Vertical Form -->
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
