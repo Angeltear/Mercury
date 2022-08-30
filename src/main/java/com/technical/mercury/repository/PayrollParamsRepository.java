@@ -10,4 +10,7 @@ import java.util.List;
 public interface PayrollParamsRepository extends JpaRepository<PayrollParams, Long> {
     PayrollParams findPayrollParamsByParameterName(final String paramName);
     List<PayrollParams> findPayrollParamsByParameterNameIsNot(final String paramName);
+
+    List<PayrollParams> findPayrollParamsByParameterPercentageGreaterThan(Double amount);
+    List<PayrollParams> findPayrollParamsByParameterPercentageLessThan(Double amount);
 }

@@ -11,4 +11,5 @@ import java.util.List;
 
 @Repository
 public interface PayslipRepository extends JpaRepository<Payslip, Long> {
+    Payslip findPayslipByEmployeeAndMonthAndYear(Employee employee, String month, int year);
 }

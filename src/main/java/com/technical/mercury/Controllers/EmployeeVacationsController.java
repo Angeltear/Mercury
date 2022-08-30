@@ -64,13 +64,13 @@ public class EmployeeVacationsController {
         Employee employeeRequestor = employeeservice.getById(id);
         Vacation vacation = new Vacation();
         vacation.setEmployeeRequestor(employeeRequestor);
-        vacation.setStatus("Pending");
         model.addAttribute("vacation", vacation);
 
         return "employees/employeeVacations/vacationRequest";
     }
     @PostMapping("/vacations/add")
     public String addEmployeeVacation(@ModelAttribute Vacation vacation){
+        vacation.setStatus("Pending");
         employeeservice.saveEmpVacation(vacation);
         return "redirect:/vacations/" + vacation.getEmployeeRequestor().getId();
     }

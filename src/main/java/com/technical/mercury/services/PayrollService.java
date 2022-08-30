@@ -27,4 +27,11 @@ public class PayrollService {
     public void delete(Long id) {
         payrollParamsRepository.deleteById(id);
     }
+
+    public List<PayrollParams> getDeducts(){
+        return payrollParamsRepository.findPayrollParamsByParameterPercentageGreaterThan(Double.parseDouble("0.00"));
+    }
+    public List<PayrollParams> getAccruals(){
+        return payrollParamsRepository.findPayrollParamsByParameterPercentageLessThan(Double.parseDouble("0.00"));
+    }
 }

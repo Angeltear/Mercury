@@ -138,6 +138,11 @@ public class EmployeeService {
 
     }
 
+    public Payslip findPayslip(Long empId, String month, int year){
+        Employee emp = employeeRepository.findById(empId).orElse(null);
+        return payslipRepository.findPayslipByEmployeeAndMonthAndYear(emp, month, year);
+    }
+
 
 
 }
