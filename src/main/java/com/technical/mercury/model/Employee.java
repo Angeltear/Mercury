@@ -1,5 +1,7 @@
 package com.technical.mercury.model;
 
+import com.technical.mercury.model.Users.User;
+import com.technical.mercury.model.Users.UserRoles;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -12,7 +14,6 @@ import java.util.List;
 @Table
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
 public class Employee {
     @Id
@@ -29,11 +30,14 @@ public class Employee {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate trialPeriod;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate employmentEndDate;
     private String employeeEmail;
     private String employeePhoneNum;
+    private boolean active;
+    private boolean hrRole;
+    private boolean adminRole;
+    @Transient
+    private String password;
 
     @ManyToOne
     @JoinColumn(name = "department_Id",foreignKey = @ForeignKey(name="FK_Department_ID"))
@@ -62,5 +66,13 @@ public class Employee {
     @OneToMany(mappedBy = "employee", orphanRemoval = true)
     @ToString.Exclude
     private List<Payslip> payslips = new ArrayList<>();
+
+    @OneToOne(mappedBy = "employee", orphanRemoval = true)
+    @ToString.Exclude
+    private User users;
+
+    @OneToMany(mappedBy = "employee", orphanRemoval = true)
+    @ToString.Exclude
+    private List<UserRoles> userRoles = new ArrayList<>();
 
 }

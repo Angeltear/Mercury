@@ -1,6 +1,7 @@
 package com.technical.mercury.Controllers;
 
 import com.technical.mercury.model.*;
+import com.technical.mercury.model.Users.UserRoles;
 import com.technical.mercury.services.DepartmentService;
 import com.technical.mercury.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +21,7 @@ public class EmployeeController {
     private DepartmentService departmentService;
 
     @GetMapping("/employees")
-    public String getEmployees(Model model){
+    public String getEmployees(Model model) {
         List<Employee> employeeList = employeeservice.getAll();
         List<PathToPage> breadcrumbs = new ArrayList<>();
         breadcrumbs.add(new PathToPage("Home", "/index"));
@@ -34,7 +36,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees/add")
-    public String addEmployee(Model model){
+    public String addEmployee(Model model) {
         List<PathToPage> breadcrumbs = new ArrayList<>();
         breadcrumbs.add(new PathToPage("Home", "/index"));
         breadcrumbs.add(new PathToPage("Employees", "/employees"));
@@ -52,14 +54,16 @@ public class EmployeeController {
 
         return "employees/employeeAdd";
     }
+
     @PostMapping("/employees/add")
-    public String addEmployee(@ModelAttribute Employee employee){
+    public String addEmployee(@ModelAttribute Employee employee) {
         employeeservice.save(employee);
+        employeeservice.addUser(employee);
         return "redirect:/employees";
     }
 
     @GetMapping("/employees/edit/{id}")
-    public String editEmployee(@PathVariable Long id, Model model){
+    public String editEmployee(@PathVariable Long id, Model model) {
         List<PathToPage> breadcrumbs = new ArrayList<>();
         breadcrumbs.add(new PathToPage("Home", "/index"));
         breadcrumbs.add(new PathToPage("Employees", "/employees"));

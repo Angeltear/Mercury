@@ -35,17 +35,14 @@ public class HomeController {
         return "test_index";
     }
 
-    @GetMapping("/requests")
-    public String getRequests(Model model){
-        String var = "testVal";
-        List<Vacation> listOfRequests = new ArrayList<>();
-      //  listOfRequests.add(new Vacation(15, "Pesho", "Paid leave", 3, "Gosho"));
-      //  listOfRequests.add(new Vacation(15, "Pesho2", "Paid leave", 3, "Gosho"));
-      //  listOfRequests.add(new Vacation(15, "Pesho3", "Paid leave", 3, "Gosho"));
-      //  listOfRequests.add(new Vacation(15, "Pesho6", "Paid leave", 3, "Gosho"));
-        model.addAttribute("listOfRequests", listOfRequests);
-        model.addAttribute("pageTitle", "Requests");
-        return "requests";
+    @GetMapping("/user")
+    public String getUsers(Model model){
+        return "test_index";
+    }
+
+    @GetMapping("/admin")
+    public String getAdmins(Model model){
+        return "test_index";
     }
 
     @GetMapping("/employee")

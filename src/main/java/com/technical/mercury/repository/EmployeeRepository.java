@@ -14,4 +14,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     @Query(value = "SELECT p.* FROM employee p where not exists (select 1 from payslip p where p.month=?1 and p.year=?2)", nativeQuery = true)
     List<Employee> findAllNotProcessedForMonth(String month, int year);
+
+    List<Employee> findEmployeeByActive(boolean isActive);
+
+    Employee findEmployeeByEmployeeEmail(String email);
 }

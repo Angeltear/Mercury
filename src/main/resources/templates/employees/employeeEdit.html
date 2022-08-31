@@ -9,21 +9,9 @@
     <div class="card-body">
       <h5 class="card-title">Employee Details</h5>
       <!-- Vertical Form -->
-      <!--
-         private Long id;
-    private String employeeFirstName;
-    private String employeeLastName;
-    private String employeePosition;
-    private String employeeManager;
-    private LocalDate employmentStartDate;
-    private LocalDate careerStartDate;
-    private LocalDate birthDate;
-    private LocalDate trialPeriod;
-    private String employeeEmail;
-    private String employeePhoneNum;
-       -->
       <form class="row g-3" th:action="@{/employees/add}" th:object="${employee}" method="post">
         <input type="hidden" th:field="*{id}">
+        <input type="hidden" th:field="*{users}">
         <div class="col-12">
           <label for="inputNanme4" class="form-label fw-bold">First Name</label>
           <input type="text" class="form-control" id="inputNanme4" th:field="*{employeeFirstName}">
@@ -55,10 +43,6 @@
           <input type="date" class="form-control" id="inputPassword4" th:field="*{birthDate}" value="2022-07-26">
         </div>
         <div class="col-12">
-          <label for="inputPassword4" class="form-label fw-bold">Trial Period</label>
-          <input type="date" class="form-control" id="inputPassword4" th:field="*{trialPeriod}" value="2022-07-26">
-        </div>
-        <div class="col-12">
           <label for="inputPassword4" class="form-label fw-bold">Email</label>
           <input type="email" class="form-control" id="inputPassword4" th:field="*{employeeEmail}">
         </div>
@@ -68,14 +52,20 @@
           <input type="tel" class="form-control" id="inputPassword4" th:field="*{employeePhoneNum}" placeholder="0877777777">
         </div>
         <div class="col-12">
-          <label for="inputPassword4" class="form-label fw-bold">Company Departure Date</label>
-          <input type="date" class="form-control" id="inputPassword4" th:field="*{employmentEndDate}" value="2022-07-26">
-        </div>
-        <div class="col-12">
           <label for="inputState" class="form-label fw-bold">Department</label>
           <select id="inputState" class="form-select" th:field="${employee.department.id}">
             <option th:each="department: ${departmentList}" th:value="${department.id}" th:text="${department.departmentName} + ', ' + ${department.departmentOffice}"></option>
           </select>
+        </div>
+        <div class="col-12">
+          <label class="form-label fw-bold">HR</label>
+          <input type="checkbox" th:field="*{hrRole}" th:checked="${hrRole}">
+
+          <label class="form-label fw-bold">Active</label>
+          <input type="checkbox" th:field="*{active}" th:checked="${active}">
+
+          <label class="form-label fw-bold">Admin</label>
+          <input type="checkbox" th:field="*{adminRole}" th:checked="${adminRole}">
         </div>
 
         <div class="text-center">
