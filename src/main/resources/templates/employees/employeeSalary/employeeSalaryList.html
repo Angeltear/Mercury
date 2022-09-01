@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{_layout}">
 <body>
 <div layout:fragment="content">
     <div class="card">
 
-        <!--
-                    <h5 class="card-title">Table with hoverable rows</h5>
-        -->
         <div class="card-body">
             <!-- Table with hoverable rows -->
             <table class="table table-hover">
@@ -33,7 +31,7 @@
                     <td th:text="${salary.endPeriod}"></td>
                     <td th:text="${id}"></td>
                     <td>
-                        <a class="btn btn-primary" th:href="@{'/employeeSalary/edit/' + ${salary.id} + '/' + ${salary.employee.id}} ">Edit Salary</a>
+                        <a sec:authorize="hasRole('HR')" class="btn btn-primary" th:href="@{'/employeeSalary/edit/' + ${salary.id} + '/' + ${salary.employee.id}} ">Edit Salary</a>
                     </td>
                 </tr>
                 </tbody>
@@ -42,7 +40,7 @@
         </div>
 
     </div>
-    <div class="card">
+    <div sec:authorize="hasRole('HR')" class="card">
         <div class="card-header">
             <a th:href="@{'/employeeSalary/add/' + ${id}}" class="btn btn-primary"> New salary entry</a>
         </div>

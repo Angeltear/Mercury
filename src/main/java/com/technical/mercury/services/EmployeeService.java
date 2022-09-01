@@ -44,8 +44,9 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public List<Employee> getAllActive() {
-        return employeeRepository.findEmployeeByActive(true);
+    public List<Employee> getAllActive(Long empId) {
+        Employee emp = employeeRepository.findById(empId).orElse(null);
+        return employeeRepository.findAllByEmployeeManagerAndActive(emp, true);
     }
 
     public void save(Employee employee) {
@@ -176,9 +177,12 @@ public class EmployeeService {
         User user = userRepository.findByUserName(employee.getEmployeeEmail());
         List<UserRoles> currentRoles = userRolesRepository.findUserRolesByUser(user);
 
-        if (userRepository.findById(employee.getUsers().getId()).isPresent()){
-            user = userRepository.findById(employee.getUsers().getId()).orElse(null);
+        if (employee.getUsers() != null){
+            if (userRepository.findById(employee.getUsers().getId()).isPresent()){
+                user = userRepository.findById(employee.getUsers().getId()).orElse(null);
+            }
         }
+
 
         if (user == null) {
             user = new User();
@@ -191,7 +195,7 @@ public class EmployeeService {
 
         userRepository.save(user);
 
-        if (currentRoles.size()==0){
+        if (currentRoles.size() > 0){
             userRolesRepository.deleteAllByUser(user);
         }
 

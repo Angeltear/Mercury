@@ -65,18 +65,11 @@ public class PayslipController {
         return "/payslip/payslipView";
     }
 
-    @PostMapping("/payslip/viewEmp/{empId}")
-    public String viewEmployeePayslip(@PathVariable Long empId, PayslipSelectedObject selection, Model model){
+    @PostMapping("/payslip/viewEmp/")
+    public String viewEmployeePayslip(Long empId, PayslipSelectedObject selection, Model model){
         Employee emp;
-        if (empId == null) {
-            emp = employeeService.getById(Long.parseLong("13"));
-        }
-        else{
             emp = employeeService.getById(empId);
-        }
-        selection.setMonth("January");
-        selection.setYear(2022);
-        Payslip payslip = employeeService.findPayslip(Long.parseLong("13"), selection.getMonth(), selection.getYear());
+        Payslip payslip = employeeService.findPayslip(empId, selection.getMonth(), selection.getYear());
         List<PayrollParams> paramsDeduct = payrollService.getDeducts();
         List<PayrollParams> paramsAccrual = payrollService.getAccruals();
 

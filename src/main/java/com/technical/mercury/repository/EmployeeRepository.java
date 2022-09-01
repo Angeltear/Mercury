@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
-    List<Employee> findAllByEmployeeManager(final Employee emp);
+    List<Employee> findAllByEmployeeManagerAndActive(final Employee emp, final boolean active);
 
     @Query(value = "SELECT p.* FROM employee p where not exists (select 1 from payslip p where p.month=?1 and p.year=?2)", nativeQuery = true)
     List<Employee> findAllNotProcessedForMonth(String month, int year);

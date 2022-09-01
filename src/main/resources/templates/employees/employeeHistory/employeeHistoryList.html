@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{_layout}">
 <body>
 <div layout:fragment="content">
   <div class="card">
-
-    <!--
-                <h5 class="card-title">Table with hoverable rows</h5>
-    -->
     <div class="card-body">
       <!-- Table with hoverable rows -->
       <table class="table table-hover">
@@ -35,7 +32,7 @@
           <td th:text="${id}"></td>
           <td th:text="${history.companyName}"></td>
           <td>
-            <a class="btn btn-primary" th:href="@{'/employeeHistory/edit/' + ${history.id} + '/' + ${history.employee.id}} ">Edit History</a>
+            <a sec:authorize="hasRole('HR')" class="btn btn-primary" th:href="@{'/employeeHistory/edit/' + ${history.id} + '/' + ${history.employee.id}} ">Edit History</a>
           </td>
         </tr>
         </tbody>
@@ -44,7 +41,7 @@
     </div>
 
   </div>
-  <div class="card">
+  <div sec:authorize="hasRole('HR')" class="card">
     <div class="card-header">
       <a th:href="@{'/employeeHistory/add/' + ${id}}" class="btn btn-primary"> New history entry</a>
     </div>

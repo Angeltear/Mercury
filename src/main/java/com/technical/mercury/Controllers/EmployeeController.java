@@ -1,14 +1,17 @@
 package com.technical.mercury.Controllers;
 
 import com.technical.mercury.model.*;
+import com.technical.mercury.model.Users.MercuryUserDetails;
 import com.technical.mercury.model.Users.UserRoles;
 import com.technical.mercury.services.DepartmentService;
 import com.technical.mercury.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +23,27 @@ public class EmployeeController {
     @Autowired
     private DepartmentService departmentService;
 
+    @GetMapping("/employeeManagement")
+    public String getAllEmployees(Model model) {
+        List<Employee> employeeList = employeeservice.getAll();
+        List<PathToPage> breadcrumbs = new ArrayList<>();
+        breadcrumbs.add(new PathToPage("Home", "/index"));
+        ///  breadcrumbs.add(new PathToPage("employees", "/employees"));
+        model.addAttribute("breadcrumbs", breadcrumbs);
+        model.addAttribute("currentPage", "Employees");
+        //   if (!departmentList.isEmpty()){
+        model.addAttribute("employees", employeeList);
+        model.addAttribute("pageTitle", "Employees");
+        //     }
+        return "employees/employeeList";
+    }
+
     @GetMapping("/employees")
     public String getEmployees(Model model) {
-        List<Employee> employeeList = employeeservice.getAll();
+        MercuryUserDetails currentEmp = (MercuryUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Employee> employeeList = employeeservice.getAllActive(currentEmp.getUser().getEmployee().getId());
+        Employee emp = employeeservice.getById(currentEmp.getUser().getEmployee().getId());
+        employeeList.add(emp);
         List<PathToPage> breadcrumbs = new ArrayList<>();
         breadcrumbs.add(new PathToPage("Home", "/index"));
         ///  breadcrumbs.add(new PathToPage("employees", "/employees"));

@@ -4,6 +4,8 @@
       layout:decorate="~{_layout}">
 <body>
 <div layout:fragment="content">
+    <div th:if="${#authentication.getPrincipal().getUser().getEmployee().getId() == employee.id or #authorization.expression('hasRole(''HR'')')}">
+
 
     <div class="card">
         <div class="card-header">
@@ -41,7 +43,8 @@
                     <td th:text="${vacation.vacationEndDate}"></td>
                     <td th:text="${vacation.status}"></td>
                     <td>
-                        <a class="btn btn-warning" th:href="@{'/vacations/edit/' +${vacation.id} + '/' + ${vacation.employeeRequestor.id}}">Edit</a>
+                        <a class="btn btn-warning"
+                           th:href="@{'/vacations/edit/' +${vacation.id} + '/' + ${vacation.employeeRequestor.id}}">Edit</a>
                     </td>
                 </tr>
                 </tbody>
@@ -85,8 +88,10 @@
                     <td th:text="${vacation.vacationEndDate}"></td>
                     <td th:text="${vacation.status}"></td>
                     <td>
-                        <a class="btn btn-primary" th:href="@{'/vacations/confirm/' +${vacation.id} + '/' + ${vacation.employeeRequestor.id}}">Confirm</a>
-                        <a class="btn btn-danger" th:href="@{'/vacations/deny/' +${vacation.id}+  '/' + ${vacation.employeeRequestor.id}}">Decline</a>
+                        <a class="btn btn-primary"
+                           th:href="@{'/vacations/confirm/' +${vacation.id} + '/' + ${vacation.employeeRequestor.id}}">Confirm</a>
+                        <a class="btn btn-danger"
+                           th:href="@{'/vacations/deny/' +${vacation.id}+  '/' + ${vacation.employeeRequestor.id}}">Decline</a>
                     </td>
                 </tr>
                 </tbody>
@@ -136,8 +141,10 @@
         </div>
 
     </div>
-
-
+    </div>
+    <div th:unless="${#authentication.getPrincipal().getUser().getEmployee().getId() == employee.id or #authorization.expression('hasRole(''HR'')')}">
+        <h1>Unauthorized</h1>
+    </div>
 
 </div>
 </body>

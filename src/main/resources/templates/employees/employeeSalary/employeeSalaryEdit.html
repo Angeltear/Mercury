@@ -1,48 +1,53 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{_layout}">
 <body>
 <div layout:fragment="content">
+    <div sec:authorize="hasRole('HR')">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Employee Salary Details</h5>
+                <form class="row g-3" th:action="@{/employeeSalary/add}" th:object="${employeeSalary}" method="post">
+                    <input type="hidden" th:field="*{id}">
+                    <input type="hidden" th:field="${employeeSalary.employee.id}">
+                    <div class="col-12">
+                        <label for="inputNanme4" class="form-label fw-bold">First Name</label>
+                        <input type="text" class="form-control" id="inputNanme4"
+                               th:field="${employeeSalary.employee.employeeFirstName}">
+                    </div>
+                    <div class="col-12">
+                        <label for="inputNanme4" class="form-label fw-bold">Last Name</label>
+                        <input type="text" class="form-control" id="inputNanme4"
+                               th:field="${employeeSalary.employee.employeeLastName}">
+                    </div>
+                    <div class="col-12">
+                        <label for="inputNanme4" class="form-label fw-bold">Salary</label>
+                        <input type="text" class="form-control" id="inputNanme4" th:field="*{salary}">
+                    </div>
+                    <div class="col-12">
+                        <label for="inputPassword4" class="form-label fw-bold">Start Date</label>
+                        <input type="date" class="form-control" id="inputPassword4" th:field="*{startPeriod}"
+                               value="2022-07-26">
+                    </div>
+                    <div class="col-12">
+                        <label for="inputPassword4" class="form-label fw-bold">End Date</label>
+                        <input type="date" class="form-control" id="inputPassword4" th:field="*{endPeriod}"
+                               value="2022-07-26">
+                    </div>
 
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Employee Salary Details</h5>
-            <form class="row g-3" th:action="@{/employeeSalary/add}" th:object="${employeeSalary}" method="post">
-                <input type="hidden" th:field="*{id}">
-                <input type="hidden" th:field="${employeeSalary.employee.id}">
-                <div class="col-12">
-                    <label for="inputNanme4" class="form-label fw-bold">First Name</label>
-                    <input type="text" class="form-control" id="inputNanme4" th:field="${employeeSalary.employee.employeeFirstName}">
-                </div>
-                <div class="col-12">
-                    <label for="inputNanme4" class="form-label fw-bold">Last Name</label>
-                    <input type="text" class="form-control" id="inputNanme4" th:field="${employeeSalary.employee.employeeLastName}">
-                </div>
-                <div class="col-12">
-                    <label for="inputNanme4" class="form-label fw-bold">Salary</label>
-                    <input type="text" class="form-control" id="inputNanme4" th:field="*{salary}">
-                </div>
-                <div class="col-12">
-                    <label for="inputPassword4" class="form-label fw-bold">Start Date</label>
-                    <input type="date" class="form-control" id="inputPassword4" th:field="*{startPeriod}" value="2022-07-26">
-                </div>
-                <div class="col-12">
-                    <label for="inputPassword4" class="form-label fw-bold">End Date</label>
-                    <input type="date" class="form-control" id="inputPassword4" th:field="*{endPeriod}" value="2022-07-26">
-                </div>
 
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                        <a th:href="@{'/employeeSalary/' + ${employeeSalary.employee.id}}" class="btn btn-warning">Cancel</a>
+                    </div>
+                </form><!-- Vertical Form -->
 
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <button type="reset" class="btn btn-secondary">Reset</button>
-                    <a th:href="@{'/employeeSalary/' + ${employeeSalary.employee.id}}" class="btn btn-warning">Cancel</a>
-                </div>
-            </form><!-- Vertical Form -->
-
+            </div>
         </div>
     </div>
-
 </div>
 </body>
 </html>

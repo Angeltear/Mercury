@@ -27,6 +27,7 @@ public class MercuryUserDetails implements UserDetails {
         this.userName = user.getUserName();
         this.password = user.getPassword();
         this.active = user.isActive();
+        this.user=user;
 
         for (UserRoles userRole:user.getUserRoles()) {
             this.authorities.add(new SimpleGrantedAuthority(userRole.getUserRole()));
@@ -69,5 +70,9 @@ public class MercuryUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return active;
+    }
+
+    public User getUser() {
+        return user;
     }
 }

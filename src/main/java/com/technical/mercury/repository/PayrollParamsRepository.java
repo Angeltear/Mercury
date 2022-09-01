@@ -11,6 +11,6 @@ public interface PayrollParamsRepository extends JpaRepository<PayrollParams, Lo
     PayrollParams findPayrollParamsByParameterName(final String paramName);
     List<PayrollParams> findPayrollParamsByParameterNameIsNot(final String paramName);
 
-    List<PayrollParams> findPayrollParamsByParameterPercentageGreaterThan(Double amount);
+    List<PayrollParams> findPayrollParamsByParameterPercentageGreaterThanAndParameterNameIsNot(Double amount, String name);
     List<PayrollParams> findPayrollParamsByParameterPercentageLessThan(Double amount);
 }

@@ -28,10 +28,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http.authorizeRequests()
-                .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/user").hasAnyRole("ADMIN", "USER")
-                .antMatchers("/").permitAll()
-                .and().formLogin();
+
+                .antMatchers("/assets/**").permitAll()
+                .antMatchers("/payslip/init").hasRole("HR")
+                .antMatchers("/locations*").hasRole("ADMIN")
+                .antMatchers("/departments", "/departments/", "/departments/*").hasRole("ADMIN")
+                .antMatchers("/params", "/params/*", "/params/").hasRole("HR")
+                .antMatchers("/vacations", "/vacations/").hasRole("HR")
+                .anyRequest().authenticated()
+                .and().formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .and().logout();
 
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.ALWAYS);

@@ -1,8 +1,10 @@
 package com.technical.mercury.Controllers;
 
 import com.technical.mercury.model.*;
+import com.technical.mercury.model.Users.MercuryUserDetails;
 import com.technical.mercury.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -97,8 +99,8 @@ public class EmployeeVacationsController {
     public String confirmEmployeeVacation(@PathVariable String confirmation, @PathVariable Long id, @PathVariable Long empId, Model model){
 
         employeeservice.confirmVacation(confirmation,id);
+        MercuryUserDetails currentEmp = (MercuryUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-
-        return "redirect:/vacations/" + empId;
+        return "redirect:/vacations/" + currentEmp.getUser().getEmployee().getId();
     }
 }

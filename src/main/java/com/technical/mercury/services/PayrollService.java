@@ -29,7 +29,7 @@ public class PayrollService {
     }
 
     public List<PayrollParams> getDeducts(){
-        return payrollParamsRepository.findPayrollParamsByParameterPercentageGreaterThan(Double.parseDouble("0.00"));
+        return payrollParamsRepository.findPayrollParamsByParameterPercentageGreaterThanAndParameterNameIsNot(Double.parseDouble("0.00"), "IncomeCeiling");
     }
     public List<PayrollParams> getAccruals(){
         return payrollParamsRepository.findPayrollParamsByParameterPercentageLessThan(Double.parseDouble("0.00"));
