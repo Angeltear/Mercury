@@ -32,5 +32,4 @@ public class UserRoles {
     @JoinColumn(name = "user_Id", foreignKey = @ForeignKey(name = "FK_Role_User_ID"))
     private User user;
 
-
 }

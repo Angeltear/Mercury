@@ -187,7 +187,6 @@ public class EmployeeService {
             }
         }
 
-
         if (user == null) {
             user = new User();
             user.setPassword(securityConfiguration.getPasswordEncoder().encode(employee.getPassword()));
