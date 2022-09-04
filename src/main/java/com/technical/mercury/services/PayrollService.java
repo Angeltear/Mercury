@@ -1,6 +1,5 @@
 package com.technical.mercury.services;
 
-import com.technical.mercury.model.Location;
 import com.technical.mercury.model.PayrollParams;
 import com.technical.mercury.repository.PayrollParamsRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,11 +13,13 @@ public class PayrollService {
 
     private final PayrollParamsRepository payrollParamsRepository;
 
-    public List<PayrollParams> getAll(){
+    public List<PayrollParams> getAll() {
         return payrollParamsRepository.findAll();
     }
 
-    public PayrollParams save(PayrollParams payrollParams){return payrollParamsRepository.save(payrollParams);}
+    public PayrollParams save(PayrollParams payrollParams) {
+        return payrollParamsRepository.save(payrollParams);
+    }
 
     public PayrollParams getById(Long id) {
         return payrollParamsRepository.findById(id).orElse(null);
@@ -28,10 +29,11 @@ public class PayrollService {
         payrollParamsRepository.deleteById(id);
     }
 
-    public List<PayrollParams> getDeducts(){
+    public List<PayrollParams> getDeducts() {
         return payrollParamsRepository.findPayrollParamsByParameterPercentageGreaterThanAndParameterNameIsNot(Double.parseDouble("0.00"), "IncomeCeiling");
     }
-    public List<PayrollParams> getAccruals(){
+
+    public List<PayrollParams> getAccruals() {
         return payrollParamsRepository.findPayrollParamsByParameterPercentageLessThan(Double.parseDouble("0.00"));
     }
 }

@@ -1,12 +1,15 @@
 package com.technical.mercury.model;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Table(name="VACATION")
+@Table(name = "VACATION")
 @Entity
 @Getter
 @Setter

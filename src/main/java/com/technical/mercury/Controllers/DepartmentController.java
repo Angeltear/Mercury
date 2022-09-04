@@ -23,7 +23,7 @@ public class DepartmentController {
 
 
     @GetMapping("/departments")
-    public String getDepartments(Model model){
+    public String getDepartments(Model model) {
         List<Department> departmentList = departmentService.getAll();
         List<PathToPage> breadcrumbs = new ArrayList<>();
         breadcrumbs.add(new PathToPage("Home", "/index"));
@@ -31,14 +31,14 @@ public class DepartmentController {
         model.addAttribute("breadcrumbs", breadcrumbs);
         model.addAttribute("currentPage", "Departments");
         //   if (!departmentList.isEmpty()){
-        model.addAttribute("departments",departmentList);
+        model.addAttribute("departments", departmentList);
         model.addAttribute("pageTitle", "Departments");
         //     }
         return "departments/departmentList";
     }
 
     @GetMapping("/departments/add")
-    public String addDepartment(Model model){
+    public String addDepartment(Model model) {
         List<PathToPage> breadcrumbs = new ArrayList<>();
         breadcrumbs.add(new PathToPage("Home", "/index"));
         breadcrumbs.add(new PathToPage("Departments", "/departments"));
@@ -54,14 +54,15 @@ public class DepartmentController {
 
         return "departments/departmentAdd";
     }
+
     @PostMapping("/departments/add")
-    public String addDepartment(@ModelAttribute Department department){
+    public String addDepartment(@ModelAttribute Department department) {
         departmentService.save(department);
         return "redirect:/departments";
     }
 
     @GetMapping("/departments/edit/{id}")
-    public String editDepartment(@PathVariable Long id, Model model){
+    public String editDepartment(@PathVariable Long id, Model model) {
         List<PathToPage> breadcrumbs = new ArrayList<>();
         breadcrumbs.add(new PathToPage("Home", "/index"));
         breadcrumbs.add(new PathToPage("Departments", "/departments"));
@@ -78,8 +79,8 @@ public class DepartmentController {
         return "departments/departmentEdit";
     }
 
-    @RequestMapping(value = "/departments/delete/{id}", method = {RequestMethod.GET,RequestMethod.DELETE})
-    public String deleteDepartment(@PathVariable Long id){
+    @RequestMapping(value = "/departments/delete/{id}", method = {RequestMethod.GET, RequestMethod.DELETE})
+    public String deleteDepartment(@PathVariable Long id) {
         departmentService.delete(id);
         return "redirect:/departments";
     }

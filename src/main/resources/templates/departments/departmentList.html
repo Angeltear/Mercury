@@ -9,36 +9,35 @@
         <!--
                     <h5 class="card-title">Table with hoverable rows</h5>
         -->
-            <div class="card-body">
-                <!-- Table with hoverable rows -->
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Location</th>
-                        <th scope="col">City</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="department: ${departments}">
-                        <td th:text="${department.id}"></td>
-                        <td th:text="${department.departmentName}"></td>
-                        <td th:text="${department.departmentOffice}"></td>
-                        <td th:text="${department.location.city}"></td>
-                        <td th:text="${department.location.street_address}"></td>
-                        <td>
-                            <a class="btn btn-primary" href="/departments/add">Details</a>
-                            <a class="btn btn-warning" th:href="@{'/departments/edit/' +${department.id}}">Edit</a>
-                            <a class="btn btn-danger" th:href="@{'/departments/delete/' +${department.id}}">Delete</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <!-- End Table with hoverable rows -->
-            </div>
+        <div class="card-body">
+            <!-- Table with hoverable rows -->
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="department: ${departments}">
+                    <td th:text="${department.id}"></td>
+                    <td th:text="${department.departmentName}"></td>
+                    <td th:text="${department.departmentOffice}"></td>
+                    <td th:text="${department.location.city}"></td>
+                    <td th:text="${department.location.street_address}"></td>
+                    <td>
+                        <a class="btn btn-warning" th:href="@{'/departments/edit/' +${department.id}}">Edit</a>
+                        <a class="btn btn-danger" th:href="@{'/departments/delete/' +${department.id}}">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!-- End Table with hoverable rows -->
+        </div>
 
     </div>
     <div class="card">

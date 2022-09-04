@@ -1,7 +1,9 @@
 package com.technical.mercury.Controllers;
 
-import com.technical.mercury.model.*;
+import com.technical.mercury.model.Employee;
+import com.technical.mercury.model.PathToPage;
 import com.technical.mercury.model.Users.MercuryUserDetails;
+import com.technical.mercury.model.Vacation;
 import com.technical.mercury.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,7 +24,7 @@ public class EmployeeVacationsController {
     private EmployeeService employeeservice;
 
     @GetMapping("/vacations")
-    public String getVacations(Model model){
+    public String getVacations(Model model) {
         List<PathToPage> breadcrumbs = new ArrayList<>();
         breadcrumbs.add(new PathToPage("Home", "/index"));
         model.addAttribute("breadcrumbs", breadcrumbs);
@@ -34,7 +36,7 @@ public class EmployeeVacationsController {
     }
 
     @GetMapping("/vacations/{id}")
-    public String getEmployeeVacation(@PathVariable Long id, Model model){
+    public String getEmployeeVacation(@PathVariable Long id, Model model) {
 
         List<PathToPage> breadcrumbs = new ArrayList<>();
         breadcrumbs.add(new PathToPage("Home", "/index"));
@@ -54,7 +56,7 @@ public class EmployeeVacationsController {
     }
 
     @GetMapping("/vacations/add/{id}")
-    public String addEmployeeVacation(@PathVariable Long id, Model model){
+    public String addEmployeeVacation(@PathVariable Long id, Model model) {
         List<PathToPage> breadcrumbs = new ArrayList<>();
         breadcrumbs.add(new PathToPage("Home", "/index"));
         breadcrumbs.add(new PathToPage("Vacations", "/vacations/" + id));
@@ -70,15 +72,16 @@ public class EmployeeVacationsController {
 
         return "employees/employeeVacations/vacationRequest";
     }
+
     @PostMapping("/vacations/add")
-    public String addEmployeeVacation(@ModelAttribute Vacation vacation){
+    public String addEmployeeVacation(@ModelAttribute Vacation vacation) {
         vacation.setStatus("Pending");
         employeeservice.saveEmpVacation(vacation);
         return "redirect:/vacations/" + vacation.getEmployeeRequestor().getId();
     }
 
     @GetMapping("/vacations/edit/{id}/{empId}")
-    public String editEmployeeVacation(@PathVariable Long id, @PathVariable Long empId, Model model){
+    public String editEmployeeVacation(@PathVariable Long id, @PathVariable Long empId, Model model) {
         List<PathToPage> breadcrumbs = new ArrayList<>();
         breadcrumbs.add(new PathToPage("Home", "/index"));
         breadcrumbs.add(new PathToPage("Employees", "/employees"));
@@ -96,9 +99,9 @@ public class EmployeeVacationsController {
     }
 
     @GetMapping("/vacations/{confirmation}/{id}/{empId}")
-    public String confirmEmployeeVacation(@PathVariable String confirmation, @PathVariable Long id, @PathVariable Long empId, Model model){
+    public String confirmEmployeeVacation(@PathVariable String confirmation, @PathVariable Long id, @PathVariable Long empId, Model model) {
 
-        employeeservice.confirmVacation(confirmation,id);
+        employeeservice.confirmVacation(confirmation, id);
         MercuryUserDetails currentEmp = (MercuryUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         return "redirect:/vacations/" + currentEmp.getUser().getEmployee().getId();

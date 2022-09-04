@@ -1,9 +1,7 @@
 package com.technical.mercury.Controllers;
 
-import com.technical.mercury.model.Department;
 import com.technical.mercury.model.Location;
 import com.technical.mercury.model.PathToPage;
-import com.technical.mercury.services.DepartmentService;
 import com.technical.mercury.services.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +19,7 @@ public class LocationController {
 
 
     @GetMapping("/locations")
-    public String getLocations(Model model){
+    public String getLocations(Model model) {
         List<Location> locationList = locationService.getAll();
         List<PathToPage> breadcrumbs = new ArrayList<>();
         breadcrumbs.add(new PathToPage("Home", "/index"));
@@ -35,7 +33,7 @@ public class LocationController {
     }
 
     @GetMapping("/locations/add")
-    public String addLocation(Model model){
+    public String addLocation(Model model) {
         List<PathToPage> breadcrumbs = new ArrayList<>();
         breadcrumbs.add(new PathToPage("Home", "/index"));
         breadcrumbs.add(new PathToPage("Locations", "/locations"));
@@ -48,14 +46,15 @@ public class LocationController {
 
         return "locations/locationAdd";
     }
+
     @PostMapping("/locations/add")
-    public String addLocation(@ModelAttribute Location location){
+    public String addLocation(@ModelAttribute Location location) {
         locationService.save(location);
         return "redirect:/locations";
     }
 
     @GetMapping("/locations/edit/{id}")
-    public String editLocation(@PathVariable Long id, Model model){
+    public String editLocation(@PathVariable Long id, Model model) {
         List<PathToPage> breadcrumbs = new ArrayList<>();
         breadcrumbs.add(new PathToPage("Home", "/index"));
         breadcrumbs.add(new PathToPage("Locations", "/locations"));
@@ -70,8 +69,8 @@ public class LocationController {
         return "locations/locationEdit";
     }
 
-    @RequestMapping(value = "/locations/delete/{id}", method = {RequestMethod.GET,RequestMethod.DELETE})
-    public String deleteLocation(@PathVariable Long id){
+    @RequestMapping(value = "/locations/delete/{id}", method = {RequestMethod.GET, RequestMethod.DELETE})
+    public String deleteLocation(@PathVariable Long id) {
         locationService.delete(id);
         return "redirect:/locations";
     }

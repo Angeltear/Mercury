@@ -1,18 +1,20 @@
 package com.technical.mercury.Controllers;
 
-import com.technical.mercury.model.*;
+import com.technical.mercury.model.Department;
+import com.technical.mercury.model.Employee;
+import com.technical.mercury.model.PathToPage;
 import com.technical.mercury.model.Users.MercuryUserDetails;
-import com.technical.mercury.model.Users.UserRoles;
 import com.technical.mercury.services.DepartmentService;
 import com.technical.mercury.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import java.security.Principal;
-import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.List;
 

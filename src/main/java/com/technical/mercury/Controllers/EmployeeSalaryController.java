@@ -22,7 +22,7 @@ public class EmployeeSalaryController {
     private EmployeeService employeeservice;
 
     @GetMapping("/employeeSalary/{id}")
-    public String getEmployeeSalary(@PathVariable Long id, Model model){
+    public String getEmployeeSalary(@PathVariable Long id, Model model) {
 
         List<PathToPage> breadcrumbs = new ArrayList<>();
         breadcrumbs.add(new PathToPage("Home", "/index"));
@@ -32,13 +32,14 @@ public class EmployeeSalaryController {
         //   if (!departmentList.isEmpty()){
         List<EmployeeSalary> employeeSalaryList = employeeservice.getSalariesByEmpId(id);
         model.addAttribute("employeeSalary", employeeSalaryList);
+        model.addAttribute("employeeId", id);
         model.addAttribute("pageTitle", "Employees");
         //     }
         return "employees/employeeSalary/employeeSalaryList";
     }
 
     @GetMapping("/employeeSalary/add/{id}")
-    public String addEmployeeSalary(@PathVariable Long id, Model model){
+    public String addEmployeeSalary(@PathVariable Long id, Model model) {
         List<PathToPage> breadcrumbs = new ArrayList<>();
         breadcrumbs.add(new PathToPage("Home", "/index"));
         breadcrumbs.add(new PathToPage("Employees", "/employees"));
@@ -55,14 +56,15 @@ public class EmployeeSalaryController {
 
         return "employees/employeeSalary/employeeSalaryAdd";
     }
+
     @PostMapping("/employeeSalary/add")
-    public String addEmployeeSalary(@ModelAttribute EmployeeSalary employeeSalary){
+    public String addEmployeeSalary(@ModelAttribute EmployeeSalary employeeSalary) {
         employeeservice.saveEmpSalary(employeeSalary);
         return "redirect:/employeeSalary/" + employeeSalary.getEmployee().getId();
     }
 
     @GetMapping("/employeeSalary/edit/{id}/{empId}")
-    public String editEmployeeSalary(@PathVariable Long id, @PathVariable Long empId, Model model){
+    public String editEmployeeSalary(@PathVariable Long id, @PathVariable Long empId, Model model) {
         List<PathToPage> breadcrumbs = new ArrayList<>();
         breadcrumbs.add(new PathToPage("Home", "/index"));
         breadcrumbs.add(new PathToPage("Employees", "/employees"));

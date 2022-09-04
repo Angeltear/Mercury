@@ -5,45 +5,53 @@
       layout:decorate="~{_layout}">
 <body>
 <div layout:fragment="content">
-    <div class="card">
+    <div th:if="${#authentication.getPrincipal().getUser().getEmployee().getId() == employeeId or #authorization.expression('hasRole(''HR'')')}">
 
-        <div class="card-body">
-            <!-- Table with hoverable rows -->
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Salary</th>
-                    <th scope="col">Start Period</th>
-                    <th scope="col">End Period</th>
-                    <th scope="col">Employee ID</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="salary: ${employeeSalary}">
-                    <td th:text="${salary.id}"></td>
-                    <td th:text="${salary.employee.employeeFirstName}"></td>
-                    <td th:text="${salary.employee.employeeLastName}"></td>
-                    <td th:text="${salary.salary}"></td>
-                    <td th:text="${salary.startPeriod}"></td>
-                    <td th:text="${salary.endPeriod}"></td>
-                    <td th:text="${id}"></td>
-                    <td>
-                        <a sec:authorize="hasRole('HR')" class="btn btn-primary" th:href="@{'/employeeSalary/edit/' + ${salary.id} + '/' + ${salary.employee.id}} ">Edit Salary</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <!-- End Table with hoverable rows -->
+        <div class="card">
+
+            <div class="card-body">
+                <!-- Table with hoverable rows -->
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Salary</th>
+                        <th scope="col">Start Period</th>
+                        <th scope="col">End Period</th>
+                        <th scope="col">Employee ID</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="salary: ${employeeSalary}">
+                        <td th:text="${salary.id}"></td>
+                        <td th:text="${salary.employee.employeeFirstName}"></td>
+                        <td th:text="${salary.employee.employeeLastName}"></td>
+                        <td th:text="${salary.salary}"></td>
+                        <td th:text="${salary.startPeriod}"></td>
+                        <td th:text="${salary.endPeriod}"></td>
+                        <td th:text="${id}"></td>
+                        <td>
+                            <a sec:authorize="hasRole('HR')" class="btn btn-primary"
+                               th:href="@{'/employeeSalary/edit/' + ${salary.id} + '/' + ${salary.employee.id}} ">Edit
+                                Salary</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!-- End Table with hoverable rows -->
+            </div>
+
         </div>
-
+        <div sec:authorize="hasRole('HR')" class="card">
+            <div class="card-header">
+                <a th:href="@{'/employeeSalary/add/' + ${id}}" class="btn btn-primary"> New salary entry</a>
+            </div>
+        </div>
     </div>
-    <div sec:authorize="hasRole('HR')" class="card">
-        <div class="card-header">
-            <a th:href="@{'/employeeSalary/add/' + ${id}}" class="btn btn-primary"> New salary entry</a>
-        </div>
+    <div th:unless="${#authentication.getPrincipal().getUser().getEmployee().getId() == employee.id or #authorization.expression('hasRole(''HR'')')}">
+        <h1>Not Authorized</h1>
     </div>
 </div>
 </body>

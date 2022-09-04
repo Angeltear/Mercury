@@ -5,35 +5,36 @@
 <body>
 <div layout:fragment="content">
 
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Department Details</h5>
-      <!-- Vertical Form -->
-      <form class="row g-3" th:action="@{/departments/add}" th:object="${department}" method="post">
-        <input type="hidden" th:field="*{id}">
-        <div class="col-12">
-          <label for="inputNanme4" class="form-label fw-bold">Name</label>
-          <input type="text" class="form-control" id="inputNanme4" th:field="*{departmentName}">
-        </div>
-        <div class="col-12">
-          <label for="inputPassword4" class="form-label fw-bold">Location</label>
-          <input type="text" class="form-control" id="inputPassword4" th:field="*{departmentOffice}">
-        </div>
-        <div class="col-12">
-          <label for="inputState" class="form-label fw-bold">Address</label>
-          <select id="inputState" class="form-select" th:field="${department.location.id}">
-            <option th:each="location: ${locationList}" th:value="${location.id}" th:text="${location.city} + ', ' + ${location.street_address}"></option>
-          </select>
-        </div>
-        <div class="text-center">
-          <button type="submit" class="btn btn-primary">Submit</button>
-          <button type="reset" class="btn btn-secondary">Reset</button>
-          <a th:href="@{/departments}" class="btn btn-warning">Cancel</a>
-        </div>
-      </form><!-- Vertical Form -->
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Department Details</h5>
+            <!-- Vertical Form -->
+            <form class="row g-3" th:action="@{/departments/add}" th:object="${department}" method="post">
+                <input type="hidden" th:field="*{id}">
+                <div class="col-12">
+                    <label for="inputNanme4" class="form-label fw-bold">Name</label>
+                    <input type="text" class="form-control" id="inputNanme4" th:field="*{departmentName}">
+                </div>
+                <div class="col-12">
+                    <label for="inputPassword4" class="form-label fw-bold">Location</label>
+                    <input type="text" class="form-control" id="inputPassword4" th:field="*{departmentOffice}">
+                </div>
+                <div class="col-12">
+                    <label for="inputState" class="form-label fw-bold">Address</label>
+                    <select id="inputState" class="form-select" th:field="${department.location.id}">
+                        <option th:each="location: ${locationList}" th:value="${location.id}"
+                                th:text="${location.city} + ', ' + ${location.street_address}"></option>
+                    </select>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                    <a th:href="@{/departments}" class="btn btn-warning">Cancel</a>
+                </div>
+            </form><!-- Vertical Form -->
 
+        </div>
     </div>
-  </div>
 
 </div>
 </body>

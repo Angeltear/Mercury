@@ -7,143 +7,143 @@
     <div th:if="${#authentication.getPrincipal().getUser().getEmployee().getId() == employee.id or #authorization.expression('hasRole(''HR'')')}">
 
 
-    <div class="card">
-        <div class="card-header">
-            <a th:href="@{'/vacations/add/' + ${employee.id}}" class="btn btn-primary"> New Vacation Request</a>
+        <div class="card">
+            <div class="card-header">
+                <a th:href="@{'/vacations/add/' + ${employee.id}}" class="btn btn-primary"> New Vacation Request</a>
+            </div>
         </div>
-    </div>
-    <div class="pagetitle">
-        <h1>My Pending Requests</h1>
-    </div>
-    <div class="card">
-
-        <div class="card-body">
-            <!-- Table with hoverable rows -->
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Manager</th>
-                    <th scope="col">Vacation Type</th>
-                    <th scope="col">Vacation Start Date</th>
-                    <th scope="col">Vacation End Date</th>
-                    <th scope="col">Status</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="vacation: ${pendingRequests}">
-                    <td th:text="${vacation.id}"></td>
-                    <td th:text="${vacation.employeeRequestor.employeeFirstName}"></td>
-                    <td th:text="${vacation.employeeRequestor.employeeLastName}"></td>
-                    <td th:text="${vacation.employeeRequestor.employeeManager} ? ${vacation.employeeRequestor.employeeManager.employeeFirstName} + ' ' + ${vacation.employeeRequestor.employeeManager.employeeLastName}:'No Manager'"></td>
-                    <td th:text="${vacation.vacationType}"></td>
-                    <td th:text="${vacation.vacationStartDate}"></td>
-                    <td th:text="${vacation.vacationEndDate}"></td>
-                    <td th:text="${vacation.status}"></td>
-                    <td>
-                        <a class="btn btn-warning"
-                           th:href="@{'/vacations/edit/' +${vacation.id} + '/' + ${vacation.employeeRequestor.id}}">Edit</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <!-- End Table with hoverable rows -->
+        <div class="pagetitle">
+            <h1>My Pending Requests</h1>
         </div>
+        <div class="card">
 
-    </div>
+            <div class="card-body">
+                <!-- Table with hoverable rows -->
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Manager</th>
+                        <th scope="col">Vacation Type</th>
+                        <th scope="col">Vacation Start Date</th>
+                        <th scope="col">Vacation End Date</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="vacation: ${pendingRequests}">
+                        <td th:text="${vacation.id}"></td>
+                        <td th:text="${vacation.employeeRequestor.employeeFirstName}"></td>
+                        <td th:text="${vacation.employeeRequestor.employeeLastName}"></td>
+                        <td th:text="${vacation.employeeRequestor.employeeManager} ? ${vacation.employeeRequestor.employeeManager.employeeFirstName} + ' ' + ${vacation.employeeRequestor.employeeManager.employeeLastName}:'No Manager'"></td>
+                        <td th:text="${vacation.vacationType}"></td>
+                        <td th:text="${vacation.vacationStartDate}"></td>
+                        <td th:text="${vacation.vacationEndDate}"></td>
+                        <td th:text="${vacation.status}"></td>
+                        <td>
+                            <a class="btn btn-warning"
+                               th:href="@{'/vacations/edit/' +${vacation.id} + '/' + ${vacation.employeeRequestor.id}}">Edit</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!-- End Table with hoverable rows -->
+            </div>
 
-    <div class="pagetitle">
-        <h1>My Pending Approves</h1>
-    </div>
-    <div class="card">
-
-        <!--
-                    <h5 class="card-title">Table with hoverable rows</h5>
-        -->
-        <div class="card-body">
-            <!-- Table with hoverable rows -->
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Manager</th>
-                    <th scope="col">Vacation Type</th>
-                    <th scope="col">Vacation Start Date</th>
-                    <th scope="col">Vacation End Date</th>
-                    <th scope="col">Status</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="vacation: ${pendingApproves}">
-                    <td th:text="${vacation.id}"></td>
-                    <td th:text="${vacation.employeeRequestor.employeeFirstName}"></td>
-                    <td th:text="${vacation.employeeRequestor.employeeLastName}"></td>
-                    <td th:text="${vacation.employeeRequestor.employeeManager} ? ${vacation.employeeRequestor.employeeManager.employeeFirstName} + ' ' + ${vacation.employeeRequestor.employeeManager.employeeLastName}:'No Manager'"></td>
-                    <td th:text="${vacation.vacationType}"></td>
-                    <td th:text="${vacation.vacationStartDate}"></td>
-                    <td th:text="${vacation.vacationEndDate}"></td>
-                    <td th:text="${vacation.status}"></td>
-                    <td>
-                        <a class="btn btn-primary"
-                           th:href="@{'/vacations/confirm/' +${vacation.id} + '/' + ${vacation.employeeRequestor.id}}">Confirm</a>
-                        <a class="btn btn-danger"
-                           th:href="@{'/vacations/deny/' +${vacation.id}+  '/' + ${vacation.employeeRequestor.id}}">Decline</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <!-- End Table with hoverable rows -->
         </div>
 
-    </div>
+        <div class="pagetitle">
+            <h1>My Pending Approves</h1>
+        </div>
+        <div class="card">
 
-    <div class="pagetitle">
-        <h1>My Vacation History</h1>
-    </div>
-    <div class="card">
+            <!--
+                        <h5 class="card-title">Table with hoverable rows</h5>
+            -->
+            <div class="card-body">
+                <!-- Table with hoverable rows -->
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Manager</th>
+                        <th scope="col">Vacation Type</th>
+                        <th scope="col">Vacation Start Date</th>
+                        <th scope="col">Vacation End Date</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="vacation: ${pendingApproves}">
+                        <td th:text="${vacation.id}"></td>
+                        <td th:text="${vacation.employeeRequestor.employeeFirstName}"></td>
+                        <td th:text="${vacation.employeeRequestor.employeeLastName}"></td>
+                        <td th:text="${vacation.employeeRequestor.employeeManager} ? ${vacation.employeeRequestor.employeeManager.employeeFirstName} + ' ' + ${vacation.employeeRequestor.employeeManager.employeeLastName}:'No Manager'"></td>
+                        <td th:text="${vacation.vacationType}"></td>
+                        <td th:text="${vacation.vacationStartDate}"></td>
+                        <td th:text="${vacation.vacationEndDate}"></td>
+                        <td th:text="${vacation.status}"></td>
+                        <td>
+                            <a class="btn btn-primary"
+                               th:href="@{'/vacations/confirm/' +${vacation.id} + '/' + ${vacation.employeeRequestor.id}}">Confirm</a>
+                            <a class="btn btn-danger"
+                               th:href="@{'/vacations/deny/' +${vacation.id}+  '/' + ${vacation.employeeRequestor.id}}">Decline</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!-- End Table with hoverable rows -->
+            </div>
 
-        <!--
-                    <h5 class="card-title">Table with hoverable rows</h5>
-        -->
-        <div class="card-body">
-            <!-- Table with hoverable rows -->
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Manager</th>
-                    <th scope="col">Vacation Type</th>
-                    <th scope="col">Vacation Start Date</th>
-                    <th scope="col">Vacation End Date</th>
-                    <th scope="col">Status</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="vacation: ${allVacations}">
-                    <td th:text="${vacation.id}"></td>
-                    <td th:text="${vacation.employeeRequestor.employeeFirstName}"></td>
-                    <td th:text="${vacation.employeeRequestor.employeeLastName}"></td>
-                    <td th:text="${vacation.employeeRequestor.employeeManager} ? ${vacation.employeeRequestor.employeeManager.employeeFirstName} + ' ' + ${vacation.employeeRequestor.employeeManager.employeeLastName}:'No Manager'"></td>
-                    <td th:text="${vacation.vacationType}"></td>
-                    <td th:text="${vacation.vacationStartDate}"></td>
-                    <td th:text="${vacation.vacationEndDate}"></td>
-                    <td th:text="${vacation.status}"></td>
-                </tr>
-                </tbody>
-            </table>
-            <!-- End Table with hoverable rows -->
         </div>
 
-    </div>
+        <div class="pagetitle">
+            <h1>My Vacation History</h1>
+        </div>
+        <div class="card">
+
+            <!--
+                        <h5 class="card-title">Table with hoverable rows</h5>
+            -->
+            <div class="card-body">
+                <!-- Table with hoverable rows -->
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Manager</th>
+                        <th scope="col">Vacation Type</th>
+                        <th scope="col">Vacation Start Date</th>
+                        <th scope="col">Vacation End Date</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="vacation: ${allVacations}">
+                        <td th:text="${vacation.id}"></td>
+                        <td th:text="${vacation.employeeRequestor.employeeFirstName}"></td>
+                        <td th:text="${vacation.employeeRequestor.employeeLastName}"></td>
+                        <td th:text="${vacation.employeeRequestor.employeeManager} ? ${vacation.employeeRequestor.employeeManager.employeeFirstName} + ' ' + ${vacation.employeeRequestor.employeeManager.employeeLastName}:'No Manager'"></td>
+                        <td th:text="${vacation.vacationType}"></td>
+                        <td th:text="${vacation.vacationStartDate}"></td>
+                        <td th:text="${vacation.vacationEndDate}"></td>
+                        <td th:text="${vacation.status}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!-- End Table with hoverable rows -->
+            </div>
+
+        </div>
     </div>
     <div th:unless="${#authentication.getPrincipal().getUser().getEmployee().getId() == employee.id or #authorization.expression('hasRole(''HR'')')}">
-        <h1>Unauthorized</h1>
+        <h1>Not Authorized</h1>
     </div>
 
 </div>

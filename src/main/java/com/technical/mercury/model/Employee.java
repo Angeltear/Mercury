@@ -2,7 +2,10 @@ package com.technical.mercury.model;
 
 import com.technical.mercury.model.Users.User;
 import com.technical.mercury.model.Users.UserRoles;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -40,7 +43,7 @@ public class Employee {
     private String password;
 
     @ManyToOne
-    @JoinColumn(name = "department_Id",foreignKey = @ForeignKey(name="FK_Department_ID"))
+    @JoinColumn(name = "department_Id", foreignKey = @ForeignKey(name = "FK_Department_ID"))
     private Department department;
 
     @OneToMany(mappedBy = "employee", orphanRemoval = true)

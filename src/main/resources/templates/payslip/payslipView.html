@@ -9,7 +9,7 @@
         <div class="card-body">
             <h5 class="card-title">Payslip Selection</h5>
             <!-- Vertical Form -->
-            <form class="row g-3" th:action="@{/payslip/viewEmp/}"  method="post">
+            <form class="row g-3" th:action="@{/payslip/viewEmp/}" method="post">
                 <div class="col-12">
                     <label for="inputState" class="form-label fw-bold">Month</label>
                     <select id="inputState" class="form-select" th:field="${payslipSelectedObject.month}">
@@ -22,7 +22,8 @@
                         <option th:each="year: ${years}" th:value="${year}" th:text="${year}"></option>
                     </select>
                 </div>
-                <input type="hidden" name="empId" th:value="${#authentication.getPrincipal().getUser().getEmployee().getId()}">
+                <input type="hidden" name="empId"
+                       th:value="${#authentication.getPrincipal().getUser().getEmployee().getId()}">
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">View</button>
                 </div>

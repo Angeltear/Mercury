@@ -1,6 +1,8 @@
 package com.technical.mercury.Controllers;
 
-import com.technical.mercury.model.*;
+import com.technical.mercury.model.Department;
+import com.technical.mercury.model.Employee;
+import com.technical.mercury.model.Location;
 import com.technical.mercury.services.DepartmentService;
 import com.technical.mercury.services.EmployeeService;
 import com.technical.mercury.services.LocationService;
@@ -22,7 +24,6 @@ public class HomeController {
     private LocationService locationService;
 
 
-
     @GetMapping({"/index", "/"})
     public String getIndex(Model model) {
         model.addAttribute("pageTitle", "Home");
@@ -30,14 +31,14 @@ public class HomeController {
     }
 
     @GetMapping("/login")
-    public String login(){
+    public String login() {
         return "login";
     }
 
     @GetMapping("/supersecret")
-    public String initializeUser(){
+    public String initializeUser() {
 
-        if (employeeService.getAllUsers().isEmpty()){
+        if (employeeService.getAllUsers().isEmpty()) {
             Employee emp = new Employee();
             Department dept = new Department();
             Location location = new Location();
@@ -58,7 +59,6 @@ public class HomeController {
         }
         return "redirect:/index";
     }
-
 
 
 }

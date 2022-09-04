@@ -19,7 +19,7 @@ public class PayrollParamsController {
 
 
     @GetMapping("/params")
-    public String getParameters(Model model){
+    public String getParameters(Model model) {
         List<PayrollParams> paramsList = payrollService.getAll();
         List<PathToPage> breadcrumbs = new ArrayList<>();
         breadcrumbs.add(new PathToPage("Home", "/index"));
@@ -33,7 +33,7 @@ public class PayrollParamsController {
     }
 
     @GetMapping("/params/add")
-    public String addParameter(Model model){
+    public String addParameter(Model model) {
         List<PathToPage> breadcrumbs = new ArrayList<>();
         breadcrumbs.add(new PathToPage("Home", "/index"));
         breadcrumbs.add(new PathToPage("Parameters", "/params"));
@@ -46,14 +46,15 @@ public class PayrollParamsController {
 
         return "payroll/payrollParamsAdd";
     }
+
     @PostMapping("/params/add")
-    public String addParameter(@ModelAttribute PayrollParams parameters){
+    public String addParameter(@ModelAttribute PayrollParams parameters) {
         payrollService.save(parameters);
         return "redirect:/params";
     }
 
     @GetMapping("/params/edit/{id}")
-    public String editParameter(@PathVariable Long id, Model model){
+    public String editParameter(@PathVariable Long id, Model model) {
         List<PathToPage> breadcrumbs = new ArrayList<>();
         breadcrumbs.add(new PathToPage("Home", "/index"));
         breadcrumbs.add(new PathToPage("Parameters", "/params"));
@@ -68,8 +69,8 @@ public class PayrollParamsController {
         return "payroll/payrollParamsEdit";
     }
 
-    @RequestMapping(value = "/params/delete/{id}", method = {RequestMethod.GET,RequestMethod.DELETE})
-    public String deleteParameter(@PathVariable Long id){
+    @RequestMapping(value = "/params/delete/{id}", method = {RequestMethod.GET, RequestMethod.DELETE})
+    public String deleteParameter(@PathVariable Long id) {
         payrollService.delete(id);
         return "redirect:/params";
     }

@@ -17,12 +17,11 @@ public class MercuryUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user =userRepository.findByUserName(username);
+        User user = userRepository.findByUserName(username);
 
-        if (user!= null){
+        if (user != null) {
             return new MercuryUserDetails(user);
-        }
-        else {
+        } else {
             throw new UsernameNotFoundException("Not found: " + username);
         }
     }

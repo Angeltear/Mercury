@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 
 <head>
@@ -53,7 +54,6 @@
     </div><!-- End Logo -->
 
 
-
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
 
@@ -67,7 +67,8 @@
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <span class="d-none d-md-block dropdown-toggle ps-2" th:text="${#authentication.getPrincipal().getUser().getEmployee().getEmployeeFirstName() + ' ' + #authentication.getPrincipal().getUser().getEmployee().getEmployeeLastName()}"></span>
+                    <span class="d-none d-md-block dropdown-toggle ps-2"
+                          th:text="${#authentication.getPrincipal().getUser().getEmployee().getEmployeeFirstName() + ' ' + #authentication.getPrincipal().getUser().getEmployee().getEmployeeLastName()}"></span>
                 </a><!-- End Profile Iamge Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -79,12 +80,6 @@
                         <hr class="dropdown-divider">
                     </li>
 
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="../assets/users-profile.html">
-                            <i class="bi bi-person"></i>
-                            <span>My Profile</span>
-                        </a>
-                    </li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
@@ -120,60 +115,61 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <div sec:authorize="hasRole('ADMIN')">
-        <li class="nav-heading">Helpdesk</li>
+            <li class="nav-heading">Helpdesk</li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" th:href="@{/departments}">
-                <i class="ri-ancient-pavilion-fill"></i>
-                <span>Departments</span>
-            </a>
-        </li><!-- End Dashboard Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" th:href="@{/departments}">
+                    <i class="ri-ancient-pavilion-fill"></i>
+                    <span>Departments</span>
+                </a>
+            </li><!-- End Dashboard Nav -->
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" th:href="@{/locations}">
-                <i class="bi-geo-fill"></i>
-                <span>Locations</span>
-            </a>
-        </li><!-- End Profile Page Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" th:href="@{/locations}">
+                    <i class="bi-geo-fill"></i>
+                    <span>Locations</span>
+                </a>
+            </li><!-- End Profile Page Nav -->
 
         </div>
         <div sec:authorize="hasRole('HR')">
 
-        <li class="nav-heading">HR</li>
+            <li class="nav-heading">HR</li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" th:href="@{/employeeManagement}">
-                <i class="bi-person-fill"></i>
-                <span>Employee Management</span>
-            </a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" th:href="@{/employeeManagement}">
+                    <i class="bi-person-fill"></i>
+                    <span>Employee Management</span>
+                </a>
+            </li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" th:href="@{/vacations}">
-                <i class="bi-person-fill"></i>
-                <span>Employee Vacations</span>
-            </a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" th:href="@{/vacations}">
+                    <i class="bi-person-fill"></i>
+                    <span>Employee Vacations</span>
+                </a>
+            </li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" th:href="@{/params}">
-                <i class="bi-person-fill"></i>
-                <span>Payroll Parameters</span>
-            </a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" th:href="@{/params}">
+                    <i class="bi-person-fill"></i>
+                    <span>Payroll Parameters</span>
+                </a>
+            </li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" th:href="@{/payslip/init}">
-                <i class="bi-person-fill"></i>
-                <span>Payslip Generation</span>
-            </a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" th:href="@{/payslip/init}">
+                    <i class="bi-person-fill"></i>
+                    <span>Payslip Generation</span>
+                </a>
+            </li>
 
         </div>
 
         <li class="nav-heading">Employees</li>
         <li class="nav-item">
-            <a class="nav-link collapsed" th:href="@{'/vacations/' + ${#authentication.getPrincipal().getUser().getEmployee().getId()}}">
+            <a class="nav-link collapsed"
+               th:href="@{'/vacations/' + ${#authentication.getPrincipal().getUser().getEmployee().getId()}}">
                 <i class="bi-person-fill"></i>
                 <span>Vacations</span>
             </a>

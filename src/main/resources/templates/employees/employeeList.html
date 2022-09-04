@@ -5,46 +5,48 @@
       layout:decorate="~{_layout}">
 <body>
 <div layout:fragment="content">
+
     <div class="card">
-            <div class="card-body">
-                <!-- Table with hoverable rows -->
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First Name</th>
-                        <th scope="col">Last Name</th>
-                        <th scope="col">Position</th>
-                        <th scope="col">Manager</th>
-                        <th scope="col">Department</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Phone</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="employee: ${employees}">
-                        <td th:text="${employee.id}"></td>
-                        <td th:text="${employee.employeeFirstName}"></td>
-                        <td th:text="${employee.employeeLastName}"></td>
-                        <td th:text="${employee.employeePosition}"></td>
-                        <td th:text="${employee.employeeManager} ? ${employee.employeeManager.employeeFirstName} + ' ' + ${employee.employeeManager.employeeLastName}:'No Manager'"></td>
-                        <td th:text="${employee.department.departmentName}"></td>
-                        <td th:text="${employee.employeeEmail}"></td>
-                        <td th:text="${employee.employeePhoneNum}"></td>
-                        <td>
-                            <a sec:authorize="hasRole('HR')" class="btn btn-warning" th:href="@{'/employees/edit/' +${employee.id}}">Edit</a>
-                            <a class="btn btn-primary" th:href="@{'/employeeSalary/' + ${employee.id}}">Salary</a>
-                            <a class="btn btn-primary" th:href="@{'/employeeHistory/' + ${employee.id}}">History</a>
-                            <a class="btn btn-primary" th:href="@{'/vacations/' + ${employee.id}}">Vacations</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <!-- End Table with hoverable rows -->
-            </div>
+        <div class="card-body">
+            <!-- Table with hoverable rows -->
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Manager</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="employee: ${employees}">
+                    <td th:text="${employee.id}"></td>
+                    <td th:text="${employee.employeeFirstName}"></td>
+                    <td th:text="${employee.employeeLastName}"></td>
+                    <td th:text="${employee.employeePosition}"></td>
+                    <td th:text="${employee.employeeManager} ? ${employee.employeeManager.employeeFirstName} + ' ' + ${employee.employeeManager.employeeLastName}:'No Manager'"></td>
+                    <td th:text="${employee.department.departmentName}"></td>
+                    <td th:text="${employee.employeeEmail}"></td>
+                    <td th:text="${employee.employeePhoneNum}"></td>
+                    <td>
+                        <a sec:authorize="hasRole('HR')" class="btn btn-warning"
+                           th:href="@{'/employees/edit/' +${employee.id}}">Edit</a>
+                        <a class="btn btn-primary" th:href="@{'/employeeSalary/' + ${employee.id}}">Salary</a>
+                        <a class="btn btn-primary" th:href="@{'/employeeHistory/' + ${employee.id}}">History</a>
+                        <a class="btn btn-primary" th:href="@{'/vacations/' + ${employee.id}}">Vacations</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!-- End Table with hoverable rows -->
+        </div>
 
     </div>
-    <div class="card">
+    <div class="card" sec:authorize="hasRole('HR')">
         <div class="card-header">
             <a th:href="@{/employees/add}" class="btn btn-primary"> New employee</a>
         </div>

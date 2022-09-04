@@ -3,12 +3,10 @@ package com.technical.mercury.Controllers;
 import com.technical.mercury.model.*;
 import com.technical.mercury.services.EmployeeService;
 import com.technical.mercury.services.PayrollService;
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDate;
@@ -26,7 +24,7 @@ public class PayslipController {
     private PayrollService payrollService;
 
     @GetMapping("/payslip/init")
-    public String initiatePayslip(Model model){
+    public String initiatePayslip(Model model) {
 
         PayslipInit payslipParams = new PayslipInit();
 
@@ -43,13 +41,13 @@ public class PayslipController {
     }
 
     @PostMapping("/payslip/generate")
-    public String calculatePayslip(PayslipSelectedObject selection, Model model){
+    public String calculatePayslip(PayslipSelectedObject selection, Model model) {
         employeeService.processForMonth(selection.getMonth(), selection.getYear());
         return "redirect:/";
     }
 
     @GetMapping("/payslip/view")
-    public String initiatePersonalPayslip(Model model){
+    public String initiatePersonalPayslip(Model model) {
 
         PayslipInit payslipParams = new PayslipInit();
 
@@ -66,9 +64,9 @@ public class PayslipController {
     }
 
     @PostMapping("/payslip/viewEmp/")
-    public String viewEmployeePayslip(Long empId, PayslipSelectedObject selection, Model model){
+    public String viewEmployeePayslip(Long empId, PayslipSelectedObject selection, Model model) {
         Employee emp;
-            emp = employeeService.getById(empId);
+        emp = employeeService.getById(empId);
         Payslip payslip = employeeService.findPayslip(empId, selection.getMonth(), selection.getYear());
         List<PayrollParams> paramsDeduct = payrollService.getDeducts();
         List<PayrollParams> paramsAccrual = payrollService.getAccruals();
@@ -86,7 +84,7 @@ public class PayslipController {
         breadcrumbs.add(new PathToPage("Payslip Selection", "/payslip/view"));
         model.addAttribute("breadcrumbs", breadcrumbs);
         model.addAttribute("currentPage", "Payslip View");
-        Period periodCareer = Period.between(emp.getCareerStartDate(),LocalDate.now());
+        Period periodCareer = Period.between(emp.getCareerStartDate(), LocalDate.now());
         Period periodCompany = Period.between(emp.getEmploymentStartDate(), LocalDate.now());
 
         int yearsEmployment = periodCareer.getYears();
@@ -107,7 +105,6 @@ public class PayslipController {
         model.addAttribute("pageTitle", "Payslip Viewer");
         return "/payslip/payslipViewEmployee";
     }
-
 
 
 }

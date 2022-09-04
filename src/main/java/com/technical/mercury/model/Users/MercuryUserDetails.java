@@ -1,18 +1,12 @@
 package com.technical.mercury.model.Users;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 public class MercuryUserDetails implements UserDetails {
@@ -27,9 +21,9 @@ public class MercuryUserDetails implements UserDetails {
         this.userName = user.getUserName();
         this.password = user.getPassword();
         this.active = user.isActive();
-        this.user=user;
+        this.user = user;
 
-        for (UserRoles userRole:user.getUserRoles()) {
+        for (UserRoles userRole : user.getUserRoles()) {
             this.authorities.add(new SimpleGrantedAuthority(userRole.getUserRole()));
         }
     }
