@@ -172,6 +172,10 @@ public class EmployeeService {
         return payslipRepository.findPayslipByEmployeeAndMonthAndYear(emp, month, year);
     }
 
+    public List<User> getAllUsers(){
+        return userRepository.findAll();
+    }
+
     public void addUser(Employee employee) {
         SecurityConfiguration securityConfiguration = new SecurityConfiguration();
         User user = userRepository.findByUserName(employee.getEmployeeEmail());

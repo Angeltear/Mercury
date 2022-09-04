@@ -1,6 +1,7 @@
 package com.technical.mercury.Controllers;
 
 import com.technical.mercury.model.*;
+import com.technical.mercury.model.Users.User;
 import com.technical.mercury.services.DepartmentService;
 import com.technical.mercury.services.EmployeeService;
 import com.technical.mercury.services.LocationService;
@@ -28,27 +29,8 @@ public class HomeController {
 
     @GetMapping({"/index", "/"})
     public String getIndex(Model model) {
-        Employee employee = new Employee();
-        employee.setEmployeeLastName("SomeRandomEmp");
-        model.addAttribute("employee", employee);
         model.addAttribute("pageTitle", "Home");
         return "test_index";
-    }
-
-    @GetMapping("/user")
-    public String getUsers(Model model){
-        return "test_index";
-    }
-
-    @GetMapping("/admin")
-    public String getAdmins(Model model){
-        return "test_index";
-    }
-
-    @GetMapping("/employee")
-    public String getEmployees(){
-        employeeService.getAll();
-        return "redirect:/";
     }
 
     @GetMapping("/login")
@@ -56,6 +38,30 @@ public class HomeController {
         return "login";
     }
 
+    @GetMapping("/supersecret")
+    public String initializeUser(){
+
+        if (employeeService.getAllUsers().isEmpty()){
+            Employee emp = new Employee();
+            Department dept = new Department();
+            Location location = new Location();
+            location.setCity("initial");
+            location.setStreet_address("initial");
+            locationService.save(location);
+            dept.setDepartmentName("initial");
+            dept.setLocation(location);
+            dept.setDepartmentOffice("initial");
+            departmentService.save(dept);
+            emp.setActive(true);
+            emp.setEmployeeEmail("gigaadmin@mcy.bg");
+            emp.setHrRole(true);
+            emp.setPassword("password");
+            emp.setDepartment(dept);
+            employeeService.save(emp);
+            employeeService.addUser(emp);
+        }
+        return "redirect:/index";
+    }
 
 
 
