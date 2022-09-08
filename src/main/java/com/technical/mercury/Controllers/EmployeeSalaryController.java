@@ -31,8 +31,9 @@ public class EmployeeSalaryController {
         model.addAttribute("currentPage", "Employees Salary");
         //   if (!departmentList.isEmpty()){
         List<EmployeeSalary> employeeSalaryList = employeeservice.getSalariesByEmpId(id);
+        Employee emp = employeeservice.getById(id);
         model.addAttribute("employeeSalary", employeeSalaryList);
-        model.addAttribute("employeeId", id);
+        model.addAttribute("employee", emp);
         model.addAttribute("pageTitle", "Employees");
         //     }
         return "employees/employeeSalary/employeeSalaryList";

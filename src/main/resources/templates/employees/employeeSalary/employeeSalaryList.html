@@ -5,7 +5,7 @@
       layout:decorate="~{_layout}">
 <body>
 <div layout:fragment="content">
-    <div th:if="${#authentication.getPrincipal().getUser().getEmployee().getId() == employeeId or #authorization.expression('hasRole(''HR'')')}">
+    <div th:if="${#authentication.getPrincipal().getUser().getEmployee().getId() == employee.id or #authorization.expression('hasRole(''HR'')') or #authentication.getPrincipal().getUser().getEmployee().getId() == employee.employeeManager.id}">
 
         <div class="card">
 
@@ -50,7 +50,7 @@
             </div>
         </div>
     </div>
-    <div th:unless="${#authentication.getPrincipal().getUser().getEmployee().getId() == employee.id or #authorization.expression('hasRole(''HR'')')}">
+    <div th:unless="${#authentication.getPrincipal().getUser().getEmployee().getId() == employee.id or #authorization.expression('hasRole(''HR'')') or #authentication.getPrincipal().getUser().getEmployee().getId() == employee.employeeManager.id}">
         <h1>Not Authorized</h1>
     </div>
 </div>

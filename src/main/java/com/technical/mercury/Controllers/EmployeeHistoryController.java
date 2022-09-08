@@ -32,8 +32,9 @@ public class EmployeeHistoryController {
         model.addAttribute("currentPage", "Employees History");
         //   if (!departmentList.isEmpty()){
         List<EmployeeHistory> employeeHistoryList = employeeservice.getHistoryByEmpId(id);
+        Employee emp = employeeservice.getById(id);
         model.addAttribute("employeeHistory", employeeHistoryList);
-        model.addAttribute("employeeId", id);
+        model.addAttribute("employee", emp);
         model.addAttribute("pageTitle", "Employees");
         //     }
         return "employees/employeeHistory/employeeHistoryList";
