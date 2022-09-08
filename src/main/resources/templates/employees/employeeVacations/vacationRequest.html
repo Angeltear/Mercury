@@ -7,54 +7,45 @@
 
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Vacation Request Details</h5>
-            <!--
-               private Long id;
-    private String vacationType;
-    private Long employeeApprover;
-    private String status;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate vacationStartDate;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate vacationEndDate;
-            -->
+            <h5 class="card-title">Детайли на заявка за отсъствие</h5>
+
             <form class="row g-3" th:action="@{/vacations/add}" th:object="${vacation}" method="post">
                 <input type="hidden" th:field="*{id}">
                 <input type="hidden" th:field="${vacation.employeeRequestor}">
                 <div class="col-12">
-                    <label for="inputNanme4" class="form-label fw-bold">First Name</label>
+                    <label for="inputNanme4" class="form-label fw-bold">Име</label>
                     <input type="text" class="form-control" id="inputNanme4"
                            th:field="${vacation.employeeRequestor.employeeFirstName}" disabled="disabled">
                 </div>
                 <div class="col-12">
-                    <label for="inputNanme4" class="form-label fw-bold">Last Name</label>
+                    <label for="inputNanme4" class="form-label fw-bold">Фамилия</label>
                     <input type="text" class="form-control" id="inputNanme4"
                            th:field="${vacation.employeeRequestor.employeeLastName}" disabled="disabled">
                 </div>
 
                 <div class="col-12">
-                    <label for="inputState" class="form-label fw-bold">Vacation Type</label>
+                    <label for="inputState" class="form-label fw-bold">Тип отсъствие</label>
                     <select id="inputState" class="form-select" th:field="${vacation.vacationType}">
-                        <option value="Vacation">Vacation</option>
-                        <option value="Sick Leave">Sick Leave</option>
+                        <option value="Отпуск">Отпуск</option>
+                        <option value="Болничен">Болничен</option>
                     </select>
                 </div>
                 <div class="col-12">
-                    <label for="inputPassword4" class="form-label fw-bold">Start Date</label>
+                    <label for="inputPassword4" class="form-label fw-bold">Начало</label>
                     <input type="date" class="form-control" id="inputPassword4" th:field="*{vacationStartDate}"
                            value="2022-07-26">
                 </div>
                 <div class="col-12">
-                    <label for="inputPassword4" class="form-label fw-bold">End Date</label>
+                    <label for="inputPassword4" class="form-label fw-bold">Край</label>
                     <input type="date" class="form-control" id="inputPassword4" th:field="*{vacationEndDate}"
                            value="2022-07-26">
                 </div>
 
 
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <button type="reset" class="btn btn-secondary">Reset</button>
-                    <a th:href="@{/templates/employees}" class="btn btn-warning">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Подай</button>
+                    <button type="reset" class="btn btn-secondary">Изтрий</button>
+                    <a th:href="@{/templates/employees}" class="btn btn-warning">Отказ</a>
                 </div>
             </form><!-- Vertical Form -->
 

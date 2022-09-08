@@ -6,24 +6,18 @@
 <div layout:fragment="content">
 
     <div class="card">
-
-        <!--
-                    <h5 class="card-title">Table with hoverable rows</h5>
-        -->
-
         <div class="card-body">
-            <!-- Table with hoverable rows -->
             <table class="table table-hover">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Manager</th>
-                    <th scope="col">Vacation Type</th>
-                    <th scope="col">Vacation Start Date</th>
-                    <th scope="col">Vacation End Date</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">Име</th>
+                    <th scope="col">Фамилия</th>
+                    <th scope="col">Пряк ръководител</th>
+                    <th scope="col">Тип отсъствие</th>
+                    <th scope="col">Начало</th>
+                    <th scope="col">Край</th>
+                    <th scope="col">Статус</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -31,7 +25,7 @@
                     <td th:text="${vacation.id}"></td>
                     <td th:text="${vacation.employeeRequestor.employeeFirstName}"></td>
                     <td th:text="${vacation.employeeRequestor.employeeLastName}"></td>
-                    <td th:text="${vacation.employeeRequestor.employeeManager} ? ${vacation.employeeRequestor.employeeManager.employeeFirstName} + ' ' + ${vacation.employeeRequestor.employeeManager.employeeLastName}:'No Manager'"></td>
+                    <td th:text="${vacation.employeeRequestor.employeeManager} ? ${vacation.employeeRequestor.employeeManager.employeeFirstName} + ' ' + ${vacation.employeeRequestor.employeeManager.employeeLastName}:'Няма ръководител'"></td>
                     <td th:text="${vacation.vacationType}"></td>
                     <td th:text="${vacation.vacationStartDate}"></td>
                     <td th:text="${vacation.vacationEndDate}"></td>
@@ -39,7 +33,6 @@
                 </tr>
                 </tbody>
             </table>
-            <!-- End Table with hoverable rows -->
         </div>
 
     </div>

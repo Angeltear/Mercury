@@ -6,9 +6,10 @@
 <body>
 <div layout:fragment="content">
 
-    <h1 th:text="'Welcome, ' + ${#authentication.getPrincipal().getUser().getEmployee().getEmployeeFirstName() + ' ' + #authentication.getPrincipal().getUser().getEmployee().getEmployeeLastName()}"></h1>
+    <h1 th:text="'Добре дошли отново, ' + ${#authentication.getPrincipal().getUser().getEmployee().getEmployeeFirstName() + ' ' + #authentication.getPrincipal().getUser().getEmployee().getEmployeeLastName()}"></h1>
 
-    Your user roles:
+    Вашите роли:
+    <br>
     <div sec:authentication="principal.authorities"></div>
 
 </div>

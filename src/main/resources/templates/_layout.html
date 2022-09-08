@@ -96,7 +96,7 @@
                         <form th:action="@{/logout}" method="post">
                             <button class="dropdown-item d-flex align-items-center" type="submit">
                                 <i class="bi bi-box-arrow-right"></i>
-                                <span>Sign Out</span>
+                                <span>Отписване</span>
                             </button>
                         </form>
                     </li>
@@ -120,14 +120,14 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" th:href="@{/departments}">
                     <i class="ri-ancient-pavilion-fill"></i>
-                    <span>Departments</span>
+                    <span>Департаменти</span>
                 </a>
             </li><!-- End Dashboard Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" th:href="@{/locations}">
                     <i class="bi-geo-fill"></i>
-                    <span>Locations</span>
+                    <span>Локации</span>
                 </a>
             </li><!-- End Profile Page Nav -->
 
@@ -139,28 +139,28 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" th:href="@{/employeeManagement}">
                     <i class="bi-person-fill"></i>
-                    <span>Employee Management</span>
+                    <span>Управление на служители</span>
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link collapsed" th:href="@{/vacations}">
                     <i class="bi-person-fill"></i>
-                    <span>Employee Vacations</span>
+                    <span>Служителски отпуски</span>
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link collapsed" th:href="@{/params}">
                     <i class="bi-person-fill"></i>
-                    <span>Payroll Parameters</span>
+                    <span>Параметри на заплата</span>
                 </a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link collapsed" th:href="@{/payslip/init}">
                     <i class="bi-person-fill"></i>
-                    <span>Payslip Generation</span>
+                    <span>Генериране на фиш</span>
                 </a>
             </li>
 
@@ -171,21 +171,21 @@
             <a class="nav-link collapsed"
                th:href="@{'/vacations/' + ${#authentication.getPrincipal().getUser().getEmployee().getId()}}">
                 <i class="bi-person-fill"></i>
-                <span>Vacations</span>
+                <span>Отсъствия</span>
             </a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link collapsed" th:href="@{/payslip/view}">
                 <i class="bi-person-fill"></i>
-                <span>Payslip</span>
+                <span>Фиш</span>
             </a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link collapsed" th:href="@{/employees}">
                 <i class="bi-person-fill"></i>
-                <span>Employees</span>
+                <span>Служители</span>
             </a>
         </li>
 

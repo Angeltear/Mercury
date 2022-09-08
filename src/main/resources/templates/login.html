@@ -60,33 +60,33 @@
                             <div class="card-body">
 
                                 <div class="pt-4 pb-2">
-                                    <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
-                                    <p class="text-center small">Enter your username & password to login</p>
+                                    <h5 class="card-title text-center pb-0 fs-4">Вписване в акаунт</h5>
+                                    <p class="text-center small">Моля, въведете вашето потребителско име и парола</p>
                                 </div>
 
                                 <form class="row g-3 needs-validation" th:action="@{/login}" method="post">
                                     <div th:if="${param.error}" class="text-danger">
-                                        Invalid username and password.
+                                        Невалидно потребителско име и парола.
                                     </div>
                                     <div class="col-12">
-                                        <label for="username" class="form-label">Username</label>
+                                        <label for="username" class="form-label">Потребителско име</label>
                                         <div class="input-group has-validation">
                                             <span class="input-group-text" id="inputGroupPrepend">@</span>
                                             <input type="text" name="username" class="form-control" id="username"
                                                    required>
-                                            <div class="invalid-feedback">Please enter your username.</div>
+                                            <div class="invalid-feedback">Моля, въведете потребителско име.</div>
                                         </div>
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="password" class="form-label">Password</label>
+                                        <label for="password" class="form-label">Парола</label>
                                         <input type="password" name="password" class="form-control" id="password"
                                                required>
-                                        <div class="invalid-feedback">Please enter your password!</div>
+                                        <div class="invalid-feedback">Моля, въведете парола!</div>
                                     </div>
 
                                     <div class="col-12">
-                                        <button class="btn btn-primary w-100" type="submit">Login</button>
+                                        <button class="btn btn-primary w-100" type="submit">Вход</button>
                                     </div>
                                 </form>
 
